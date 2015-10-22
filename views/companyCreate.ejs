@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pavement Pounder</title>
+
+  	<!-- Javascript CDN -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+     <!-- Latest compiled and minified JavaScript -->
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+     <!-- Bootstrap CDN -->
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+     <!-- APPLICATION SCRIPTS -->
+    <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+    <script src="/static/js/app.js"></script>
+
+
+</head>
+<body>
+<div id='wrapper'>
+  <div id='topNav' class="col-md-12">
+  <h1>Pavement Pounder</h1>
+  <h2>A Job Search Organizer</h2>
+  <button>Get Started</button>
+  <button>Log In</button>
+  	
+  </div>
+  <div id='content' class="col-md-10">
+    <h1>Create a New Company Record for your files</h1>
+    <p>Input what you know about the company in the form below and press submitt to add it to your current file</p>
+  	<form id='companyCreate' class='col-md-8'>
+  		<input type="text" name='companyName' placeholder='Company Name'></input></br>
+      <input type="text" name='companyCity'placeholder='Company City'></input></br>
+      <input type="text" name='companyPhone' placeholder='Company Phone'></input></br>
+      <input type="text" name='companyEmail' placeholder='Company Email'></input></br>
+      <input type="text" name='companyContact1'placeholder='Company Contact'></input></br>
+      <input type="text" name='companyContact2' placeholder='Company Additional Contact'></input></br>
+      <input type="text" name='companyAddress'placeholder='Company Address'></input></br>
+      <input type="radio" name='companyHotness' value="1">1</input>
+      <input type="radio" name='companyHotness' value="2">2</input>
+      <input type="radio" name='companyHotness' value="3">3</input>
+      <input type="radio" name='companyHotness' value="4">4</input>
+      <input type="radio" name='companyHotness' value="5">5</input></br>
+  		<button type="submit">Submit</button>
+  	</form>
+  </div>
+  <div id='footer'class='col-md-12'>
+  	<p>organizing people who are serious about finding a job</p>
+  </div>
+	
+</div>
+
+
+</body>
+</html>

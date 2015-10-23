@@ -40,7 +40,17 @@ app.get('/businesses', function(req, res){
 	});
 });
 
-
+//ability to delete company profiles
+app.delete('/companies/:_id', function(req, res){
+	console.log ("the entire " + req.params._id + " has been seclected to be delted");
+	db.Company.find({
+		_id: req.params._id
+	})
+	.remove(function(err, company){
+		console.log("company deleted");
+		res.json("That company is gone");
+	});
+});
 
 //connection to glassdoor api 
 var glassDoorUrl = 'http://api.glassdoor.com/api/api.htm?v=1'+ //address to glassdors API

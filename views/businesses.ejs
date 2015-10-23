@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pavement Pounder</title>
+
+  	<!-- Javascript CDN -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+     <!-- Latest compiled and minified JavaScript -->
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+     <!-- Bootstrap CDN -->
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+     <!-- APPLICATION SCRIPTS -->
+    <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+    <script src="/static/js/app.js"></script>
+
+
+</head>
+<body>
+<div id='wrapper'>
+  <% include ./_navbar %>
+  <div id='content' class="col-md-10">
+  <h1>Business Profiles</h1>
+  <div id='newest_company'>
+  <h2>Most recently added business to your files</h2>
+  <!-- auto populate the three most recent business profile added by the users-->
+  </div>
+  <div>
+    <h2>Up Coming Events</h2>
+    <!-- auto populate the 3 most recent events that have not happened yet-->
+  </div>
+  <div id='business_files'>
+  <!-- three tabs representing the three folders (current, backburner, don't contact) --> 
+    <div id="files" data-toggle="tab">
+
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="col-md-3 active"><a href="#current" aria-controls="current" role="tab" data-toggle="tab">Current Companies</a></li>
+        <li role="presentation" class="col-md-3"><a href="#burner" aria-controls="burner" role="tab" data-toggle="tab">Back Burner Companies</a></li>
+        <li role="presentation" class="col-md-3"><a href="#no_contact" aria-controls="no_contact" role="tab" data-toggle="tab">Do Not Contact List</a></li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="current">
+          <h2>Current Companies You are Pursuing</h2>
+          <div class="panel panel-default">
+            <%for (var i=0; i < companies.length; i++) { %>
+              <li class="list-group-item">
+                <h4 class="list-group-item-heading"><%= companies[i].companyName %></h4>
+                <span class='list-group-item-text'><%= companies[i].companyCity %></span></br>
+                <span class='list-group-item-text'><%= companies[i].companyPhone %></span></br>
+                <span class='list-group-item-text'><%= companies[i].companyEmail %></span></br>
+                <span class='list-group-item-text'><%= companies[i].companyContact1 %></span></br>
+                <span class='list-group-item-text'><%= companies[i].companyContact2 %></span></br>
+                <span class='list-group-item-text'><%= companies[i].companyAddress %></span></br>
+                <span class='list-group-item-text'><%= companies[i].companyHotness %></span></br>
+                <span class='list-group-item-text'><%= companies[i].companyTime %></span></br>
+                <button data-id="<%=companies[i].id %>" class='close' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+                </br>
+              </li>
+            <% } %>
+          </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="burner">
+          <h2>Back Burner Companies</h2>
+          <div class="panel panel-default">
+          </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="no_contact">
+          <h2>Do Not Contact List</h2>
+          <div class="panel panel-default">
+          </div>
+        </div>
+    </div>
+  </div>
+
+  </div>
+  </div>
+</div>
+</body>

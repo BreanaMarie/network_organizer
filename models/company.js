@@ -3,7 +3,15 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var CompanySchema= mongoose.Schema({
-	name:String
+	companyName:String,
+	companyCity:String,
+	companyPhone:String,
+	companyEmail:String,
+	companyContact1:String,
+	companyContact2:String,
+	companyAddress:String,
+	companyHotness:String,
+	companyTime:String
 });
 
 

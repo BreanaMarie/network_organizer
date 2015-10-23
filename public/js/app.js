@@ -10,23 +10,22 @@ $('#companyCreate').on('submit', function(e){
 	var dateTime= new Date();
 	$('#timeSubmit').attr('value', dateTime);
 
-	var company =$('#companyCreate').serialize();
-	$.post('/companies', company, function(data){
-		console.log(data);
+	var formData = $(this).serialize();
+	console.log(formData);
 
-	});
+		$.ajax({
+			url:'/companies',
+			type:'POST',
+			data: formData
+		})
+		.done(function(data){
+			console.log("created company");
+			window.location.href = "businesses";
 
-	// var formData = $(this).searilized();
-	// console.log(formData);
-
-	// 	$.ajax({
-	// 		url:'/companys',
-	// 		type:'POST',
-	// 		data: formData
-	// 	})
-	// 	.done(function(data){
-	// 		console.log("created company");
-	// 	});
+		})
+		.fail(function(data){
+			console.log("failed to create company");
+		});
 });
 
 

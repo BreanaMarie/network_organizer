@@ -40,6 +40,8 @@ app.get('/businesses', function(req, res){
 	});
 });
 
+
+
 //connection to glassdoor api 
 var glassDoorUrl = 'http://api.glassdoor.com/api/api.htm?v=1'+ //address to glassdors API
 '&format=json'+ //format is JSON 
@@ -55,7 +57,7 @@ var glassDoorUrl = 'http://api.glassdoor.com/api/api.htm?v=1'+ //address to glas
 //get request to glassdoor api for business
 
 //create post rout for new company added by user
-app.post('/companys', function(req, res){
+app.post('/companies', function(req, res){
 	db.Company.create(req.body, function(err, company){
 		if (err){
 			console.log(err);

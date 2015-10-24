@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Create an Account</title>
+  <% include ./_connections %>
+
+</head>
+<body>
+<div iclass='container'>
+  <% include ./_navbar %>
+  <div class="col-md-10">
+    <h1>Welcome Please create an Account</h1>
+    <p>Already a member? you can log in <a href="login">here</a></p>
+  	<form id='signup' class='col-md-8'>
+  		<input id='name' type="text" name='name' placeholder='your screen name'></input></br>
+      <input id='email' type="email" name='email' placeholder='your email'></input></br>
+      <input id='password' type="password" name='password' placeholder = 'create password'></input></br>
+      <input id='confirm'type='password' name='confirm' placeholder= 'retype password'></input></br>
+  		<button type="submit">Submit</button>
+  	</form>
+  <div id='footer'class='col-md-12'>
+  	<p>organizing people who are serious about finding a job</p>
+  </div>
+	
+</div>
+
+
+</body>
+</html>

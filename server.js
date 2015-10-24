@@ -7,6 +7,7 @@ var path=require('path');
 var bodyParser= require('body-parser');
 var mongoose = require('mongoose');
 var request = require('request');
+
 //load secrets
 require('dotenv').load();
 
@@ -15,6 +16,7 @@ app.set('view engine', 'ejs');
 app.use('/static', express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
+
 
 var db = require('./models/index.js');
 
@@ -27,7 +29,7 @@ app.get('/', function(req, res){
 	res.render('index');
 });
 
-//set up where to render company create
+//set up where to render company create form
 app.get('/company_create', function(req, res){
 	res.render('company_create');
 });
@@ -39,6 +41,27 @@ app.get('/businesses', function(req, res){
 		res.render('businesses', {companies: companies});
 	});
 });
+
+//set up where to render signup form
+app.get('/signup', function(req, res){
+	res.render('signup');
+});
+
+//set up where to render users form
+app.get('/users', function(req, res){
+	res.render('users');
+});
+
+//set render of user's profile
+// app.get('/user/:_id', function(req, res){
+// 	db.User.find({ 
+// 		_.id: req.params._id
+// 	}) 
+// 	.show(function(err, user){
+// 	 	if (err) console.log(err, user){
+// 		res.json('user', {users: users});
+// 	});
+// });
 
 //ability to delete company profiles
 app.delete('/companies/:_id', function(req, res){
@@ -74,6 +97,21 @@ app.post('/companies', function(req, res){
 		}
 	res.json(company);
 	});
+});
+
+//create a post rout for new users
+app.post('/users', function (req, res) {
+	//db.User.create(req.body, function(err, user){
+	var user = req.body;
+	console.log(db.User);
+	db.User.createSecure(user.name, user.email, user.password, function(err, user){
+	if(err){
+		console.log(err);
+	}
+
+	res.json({users:users, msg: 'user created'});
+	});
+		
 });
 
 //set preview on localy first

@@ -10,6 +10,24 @@
 <% include ./_navbar %>
 <div class='container'>
   <div id='user_profile'>
+  <!--customized info box about the user-->
+  <div id='userinfo'> 
+  <ul>
+    <li>Welcome Back </br> <%= user[x].name %></li>
+    <li><p>You currently have <%= companies[x].length +1 %> that you are following right now.</p></li>
+  </ul>
+    
+  </div>
+  <div id='hotlist'>
+    <h2>Your 5 Hotest Companies right now are:</h2>
+    <%for (var i=0; i < companies[x].length; i++) { %>
+      <%if(company[x].companyHotness == 5){ %>
+    <ul>
+      <li class='list-group-item-text'><%= companies[x].companyName %></li></br>
+      <li class='list-group-item-text'><%= companies[x].companyHotness %></li></br>
+    </ul>
+    <%}%>
+  </div>
   <!-- three tabs representing the three folders () --> 
     <div id="files" data-toggle="tab">
 
@@ -24,22 +42,6 @@
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="current">
           <h2>Current Companies You are Pursuing</h2>
-          <%for (var i=0; i < companies.length; i++) { %>
-            <div class="col-sm-6">
-              <div class='well'>
-                <h4 class="list-group-item-heading"><%= companies[i].companyName %></h4>
-                <span class='list-group-item-text'><%= companies[i].companyCity %></span></br>
-                <span class='list-group-item-text'><%= companies[i].companyPhone %></span></br>
-                <span class='list-group-item-text'><%= companies[i].companyEmail %></span></br>
-                <span class='list-group-item-text'><%= companies[i].companyContact1 %></span></br>
-                <span class='list-group-item-text'><%= companies[i].companyContact2 %></span></br>
-                <span class='list-group-item-text'><%= companies[i].companyAddress %></span></br>
-                <span class='list-group-item-text'><%= companies[i].companyHotness %></span></br>
-                <span class='list-group-item-text'><%= companies[i].companyTime %></span></br>
-                <button data-id="<%=companies[i].id %>" class='close' aria-label='Close'><span aria-hidden='true'>Delete Profile</span></button>
-              </div>
-            </div>
-          <% } %>
         </div>
         <div role="tabpanel" class="tab-pane" id="burner">
           <h2>Back Burner Companies</h2>

@@ -7,6 +7,7 @@ var path=require('path');
 var bodyParser= require('body-parser');
 var mongoose = require('mongoose');
 var request = require('request');
+var session = require('express-session');
 
 //load secrets
 require('dotenv').load();
@@ -16,6 +17,12 @@ app.set('view engine', 'ejs');
 app.use('/static', express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(session({
+	saveUninitialized: true,
+	resave: true,
+	secret:'SuperSecreteCookie',
+	cookie: {maxAge: 600000}
+}));
 
 
 var db = require('./models/index.js');
@@ -48,8 +55,21 @@ app.get('/signup', function(req, res){
 });
 
 //set up where to render users form
-app.get('/users', function(req, res){
+app.get('/users', function (req, res){
 	res.render('users');
+});
+
+//set up where profiles render to
+app.get('/profile', function (req, res){
+	db.User.find({}, function(err, users){
+		if(err) console.log(err);
+		res.render('profile', {users: users});
+	});
+});
+
+//set up current user rout
+app.get('/currentUser', function(req, res){
+	res.json({user: req.session.user});
 });
 
 //set render of user's profile
@@ -105,10 +125,11 @@ app.post('/users', function (req, res) {
 	var user = req.body;
 	console.log(db.User);
 	db.User.createSecure(user.name, user.email, user.password, function(err, user){
-	if(err){
-		console.log(err);
-	}
-
+	// if(err){
+	// 	console.log(err);
+	// }
+	req.session.userId=user._id;
+	req.session.user = user;
 	res.json({users:users, msg: 'user created'});
 	});
 		

@@ -2,8 +2,24 @@ console.log("Sanity Check: JS is working!");
 
 $(document).ready(function(){
 
+//check if users is logged in
+function checkAuth() {
+	$.get('/currentUser', function (data){
+		console.log(data);
+		if (data.user){
+			$('.noUser').hide();
+			$('.loggedIn').show();
+		}else{
+			$('.noUser').show();
+			$('.loggedIn').hide();
+		}
+	});
+}
+//check if there is a user logged on at every page load
+checkAuth();
+
 // handler for company create form with add to database
-$('#companyCreate').on('submit', function(e){
+$('#companyCreate').on('submit', function (e){
 	e.preventDefault();
 	//console.log("the button clicks");
 
@@ -29,7 +45,7 @@ $('#companyCreate').on('submit', function(e){
 });
 
 //event handler for the delete button remove from database
-$('#companyProfile').on('click', 'button.close', function(e){
+$('#companyProfile').on('click', 'button.close', function (e){
 	e.preventDefault();
 	var profileId =$(this).data().id;
 	var deleteProfile =$(this).closest('li');
@@ -37,12 +53,12 @@ $('#companyProfile').on('click', 'button.close', function(e){
 			url:'/companies/'+ profileId,
 			type: 'DELETE',
 		})
-		.done(function(data){
+		.done(function (data){
 			console.log(data);
 			$(deleteProfile).remove();
 			console.log("this company has been removed from your profile");
 		})
-		.fail(function(data){
+		.fail(function (data){
 			console.log("This company could not be deleted from your profile");
 		});
 });
@@ -86,7 +102,7 @@ $('#signup').validate({
 });
 
 //event handler for sign up form add new user to database
-$('#signup').on('submit', function(e){
+$('#signup').on('submit', function (e){
 	e.preventDefault();
 	console.log("form submitted");
 	
@@ -98,14 +114,17 @@ $('#signup').on('submit', function(e){
 				type:'POST',
 				data: userData
 			})
-			.done(function(data){
+			.done(function (data){
 				console.log("created user");
-				//window.location.href = "businesses";
+				window.location.href = "profile";
 
 			})
-			.fail(function(data){
+			.fail(function (data){
 				console.log("failed to create new user");
 			});
+		//hide sign up and login buttons	
+		$('.noUser').hide();
+		$('.loggedIn').show();
 
 });
 

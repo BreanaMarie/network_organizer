@@ -33,8 +33,32 @@
                 <span class='list-group-item-text'><%= companies[i].companyContact1 %></span></br>
                 <span class='list-group-item-text'><%= companies[i].companyContact2 %></span></br>
                 <span class='list-group-item-text'><%= companies[i].companyAddress %></span></br>
-                <span class='list-group-item-text'><%= companies[i].companyHotness %></span></br>
-                <span class='list-group-item-text'><%= companies[i].companyTime %></span></br>
+                <span class='list-group-item-text'>This company has a hotness level of:<%= companies[i].companyHotness %></span></br>
+                <span class='list-group-item-text'>You have been watching this company since:<%= companies[i].companyTime %></span></br>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                  Edit Business Profile
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"></h4>
+                      </div>
+                      <div class="modal-body">
+                        ...
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--delete button -->
                 <button data-id="<%=companies[i].id %>" class='close' aria-label='Close'><span aria-hidden='true'>Delete Profile</span></button>
               </div>
             </div>

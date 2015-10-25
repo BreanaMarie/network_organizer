@@ -18,12 +18,14 @@ app.set('view engine', 'ejs');
 app.use('/static', express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
-//set sessions to save to server
+//set sessions to save to database to preserve login on refresh 
 app.use(session({
 	saveUninitialized: true,
 	resave: true,
 	secret:'SuperSecreteCookie',
 	store: new MongoStore({mongooseConnection: mongoose.connection}),
+	//session expiration in 2 days
+	ttl:2 * 24 * 60 * 60,
 	cookie: {maxAge: 600000}
 }));
 

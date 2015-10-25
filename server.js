@@ -8,6 +8,7 @@ var bodyParser= require('body-parser');
 var mongoose = require('mongoose');
 var request = require('request');
 var session = require('express-session');
+var MongoStore= require('connect-mongo')(session);
 
 //load secrets
 require('dotenv').load();
@@ -17,10 +18,12 @@ app.set('view engine', 'ejs');
 app.use('/static', express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
+//set sessions to save to server
 app.use(session({
 	saveUninitialized: true,
 	resave: true,
 	secret:'SuperSecreteCookie',
+	store: new MongoStore({mongooseConnection: mongoose.connection}),
 	cookie: {maxAge: 600000}
 }));
 
@@ -70,6 +73,18 @@ app.get('/profile', function (req, res){
 //set up current user rout
 app.get('/currentUser', function(req, res){
 	res.json({user: req.session.user});
+});
+
+//login rout
+app.get('/login', function (req, res){
+	res.render('login');
+});
+
+//logout rout
+app.get('/logout', function (req, res){
+	req.session.userId =null;
+	req.session.user = null;
+	res.json({msg: "user has been logged out"});
 });
 
 //set render of user's profile
@@ -123,7 +138,7 @@ app.post('/companies', function(req, res){
 app.post('/users', function (req, res) {
 	//db.User.create(req.body, function(err, user){
 	var user = req.body;
-	console.log(db.User);
+	console.log(user);
 	db.User.createSecure(user.name, user.email, user.password, function(err, user){
 	// if(err){
 	// 	console.log(err);
@@ -133,6 +148,21 @@ app.post('/users', function (req, res) {
 	res.json({users:users, msg: 'user created'});
 	});
 		
+});
+
+//crate a post rout for login
+app.post('/login', function (req, res){
+	var user = req.body;
+	db.User.authenticate(user.email, user.password, function (err, user){
+		if (err){
+			console.log("there was an error:" + err);
+		}else{
+		req.session.userId= user._id;
+		req.session.user= user;
+		console.log(user);
+		res.json(user);
+	}
+	});
 });
 
 //set preview on localy first

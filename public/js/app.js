@@ -9,14 +9,61 @@ function checkAuth() {
 		if (data.user){
 			$('.noUser').hide();
 			$('.loggedIn').show();
+			console.log(data.user.name + " is signed in");
 		}else{
 			$('.noUser').show();
 			$('.loggedIn').hide();
+			console.log("there is no one signed in");
 		}
 	});
 }
 //check if there is a user logged on at every page load
 checkAuth();
+
+//handler for the log in form
+$('#login').on('submit', function (e){
+	e.preventDefault();
+	var user = $(this).serialize();
+	$.ajax({
+			url:'/login',
+			type:'POST',
+			data: user
+		})
+		.done(function (data){
+			console.log("user logged in");
+			checkAuth();
+			//window.location.href = "profile";
+
+		})
+		.fail(function (data){
+			console.log("failed to log in user");
+		});
+});
+
+//handler for the logout button
+$('#logout').on('click', function (e){
+	e.preventDefault();
+	$.get('/logout', function (data){
+		console.log(data.msg);
+	});
+});
+
+//date converter function
+function datechange(dateObject) {
+    var d = new Date(dateObject);
+    var day = d.getDate();
+    var month = d.getMonth() + 1;
+    var year = d.getFullYear();
+    if (day < 10) {
+        day = "0" + day;
+    }
+    if (month < 10) {
+        month = "0" + month;
+    }
+    var date = month + "/" + day + "/" + year;
+
+    return date;
+}
 
 // handler for company create form with add to database
 $('#companyCreate').on('submit', function (e){
@@ -24,7 +71,7 @@ $('#companyCreate').on('submit', function (e){
 	//console.log("the button clicks");
 
 	 var dateTime= new Date();
-	 $('#timeSubmit').attr('value', dateTime);
+	 $('#timeSubmit').attr('value', datechange(dateTime));
 
 	var formData = $(this).serialize();
 	console.log(formData);
@@ -34,12 +81,12 @@ $('#companyCreate').on('submit', function (e){
 			type:'POST',
 			data: formData
 		})
-		.done(function(data){
+		.done(function (data){
 			console.log("created company");
 			window.location.href = "businesses";
 
 		})
-		.fail(function(data){
+		.fail(function (data){
 			console.log("failed to create company");
 		});
 });
@@ -48,7 +95,7 @@ $('#companyCreate').on('submit', function (e){
 $('#companyProfile').on('click', 'button.close', function (e){
 	e.preventDefault();
 	var profileId =$(this).data().id;
-	var deleteProfile =$(this).closest('li');
+	var deleteProfile =$(this).closest('div');
 		$.ajax({
 			url:'/companies/'+ profileId,
 			type: 'DELETE',
@@ -104,7 +151,7 @@ $('#signup').validate({
 //event handler for sign up form add new user to database
 $('#signup').on('submit', function (e){
 	e.preventDefault();
-	console.log("form submitted");
+	//console.log("form submitted");
 	
 		var userData = $(this).serialize();
 		console.log(userData);
@@ -117,14 +164,12 @@ $('#signup').on('submit', function (e){
 			.done(function (data){
 				console.log("created user");
 				window.location.href = "profile";
-
+				//hide sign up and login buttons	
+				//checkAuth();
 			})
 			.fail(function (data){
 				console.log("failed to create new user");
 			});
-		//hide sign up and login buttons	
-		$('.noUser').hide();
-		$('.loggedIn').show();
 
 });
 

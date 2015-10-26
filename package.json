@@ -19,11 +19,8 @@
     "express-session": "^1.11.3",
     "mongoose": "^4.1.12",
     "request": "^2.65.0"
+  },
+  "scripts": {
+    "start": "node server.js"
   }
 }
-
-...
-"scripts": {
-  "start": "node server.js"
-}
-...

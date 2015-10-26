@@ -3,13 +3,16 @@ console.log("Sanity Check: JS is working!");
 $(document).ready(function(){
 
 //check if users is logged in
+var currentName='';
 function checkAuth() {
 	$.get('/currentUser', function (data){
 		console.log(data);
 		if (data.user){
+			currentName=data.user.name;
 			$('.noUser').hide();
 			$('.loggedIn').show();
 			console.log(data.user.name + " is signed in");
+			$('#welcome_message').html("<p>Welcome Back " + data.user.name + "</p>");
 		}else{
 			$('.noUser').show();
 			$('.loggedIn').hide();
@@ -19,6 +22,9 @@ function checkAuth() {
 }
 //check if there is a user logged on at every page load
 checkAuth();
+
+//pull the session user name if available
+//var greet = $.session.get('name');
 
 //handler for the log in form
 $('#login').on('submit', function (e){
@@ -32,7 +38,7 @@ $('#login').on('submit', function (e){
 		.done(function (data){
 			console.log("user logged in");
 			checkAuth();
-			//window.location.href = "profile";
+			window.location.href = "profile";
 
 		})
 		.fail(function (data){
@@ -45,6 +51,7 @@ $('#logout').on('click', function (e){
 	e.preventDefault();
 	$.get('/logout', function (data){
 		console.log(data.msg);
+		window.location.href = "/";	
 	});
 });
 

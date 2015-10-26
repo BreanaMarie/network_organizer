@@ -1,3 +1,19 @@
+body{
+	background-image: url('../images/network.jpg');
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-image: center;
+	background-size: 100%;
+	color:black;
+}
+
+#welcome_message{
+	margin-top: 10px;
+	font-size: 20px;
+	margin-right: 10px;
+}
+
 .noUser{
 	display: none;
 }
+

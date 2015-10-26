@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Pavement Pounder</title>
+	<title>Network Organizer</title>
   <% include ./_connections %>
 
 </head>
@@ -25,7 +25,7 @@
           <h2>Current Companies You are Pursuing</h2>
           <%for (var i=0; i < companies.length; i++) { %>
             <div class="col-sm-6">
-              <div class='well'>
+              <div id='<%= companies[i]._id %>' class='well'>
                 <h4 class="list-group-item-heading"><%= companies[i].companyName %></h4>
                 <span class='list-group-item-text'><%= companies[i].companyCity %></span></br>
                 <span class='list-group-item-text'><%= companies[i].companyPhone %></span></br>
@@ -46,10 +46,17 @@
                     <div class="modal-content">
                       <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel"></h4>
+                        <h4 class="modal-title" id="myModalLabel"><%= companies[i].companyName %></h4>
                       </div>
                       <div class="modal-body">
-                        ...
+                        <h4 class="list-group-item-heading"><%= companies[i].companyName %></h4>
+                        <span class='list-group-item-text'><%= companies[i].companyCity %></span></br>
+                        <span class='list-group-item-text'><%= companies[i].companyPhone %></span></br>
+                        <span class='list-group-item-text'><%= companies[i].companyEmail %></span></br>
+                        <span class='list-group-item-text'><%= companies[i].companyContact1 %></span></br>
+                        <span class='list-group-item-text'><%= companies[i].companyContact2 %></span></br>
+                        <span class='list-group-item-text'><%= companies[i].companyAddress %></span></br>
+                        <span class='list-group-item-text'>This company has a hotness level of:<%= companies[i].companyHotness %></span></br>
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

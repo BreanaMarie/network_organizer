@@ -17,3 +17,10 @@ body{
 	display: none;
 }
 
+#headlines {
+	float: right;
+}
+
+#files {
+	clear: both;
+}

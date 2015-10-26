@@ -25,8 +25,8 @@ app.use(session({
 	secret:'SuperSecreteCookie',
 	store: new MongoStore({mongooseConnection: mongoose.connection}),
 	//session expiration in 2 days
-	ttl:2 * 24 * 60 * 60,
-	cookie: {maxAge: 600000}
+	ttl: 2 * 24 * 60 * 60,
+	cookie: {maxAge: 6000000}
 }));
 
 

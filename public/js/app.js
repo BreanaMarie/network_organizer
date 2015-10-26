@@ -65,7 +65,7 @@ $('#companyProfile').on('click', 'button.close', function (e){
 		});
 });
 
-
+//event handler if button is clicked redirect to that company's profile
 $('#headlines').on('click', 'button.view_co', function (e){
 	e.preventDefault();
 	console.log('co button clicked');

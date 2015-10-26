@@ -21,3 +21,9 @@
     "request": "^2.65.0"
   }
 }
+
+...
+"scripts": {
+  "start": "node server.js"
+}
+...

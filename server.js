@@ -8,7 +8,13 @@ var bodyParser= require('body-parser');
 var mongoose = require('mongoose');
 var request = require('request');
 var session = require('express-session');
-var MongoStore= require('connect-mongo')(session);
+var MongoStore = require('connect-mongo')(session);
+
+mongoose.connect(
+  process.env.MONGOLAB_URI ||
+  process.env.MONGOHQ_URL ||
+  'mongodb://localhost/pavement' // plug in the db name you've been using
+);
 
 //load secrets
 require('dotenv').load();
@@ -173,6 +179,9 @@ app.post('/login', function (req, res){
 });
 
 //set preview on localy first
-app.listen(3000, function(){
-	console.log("listening on port 3000");
-});
+// app.listen(3000, function(){
+// 	console.log("listening on port 3000");
+// });
+
+app.listen(process.env.PORT || 3000);
+

@@ -36,12 +36,12 @@
                 <span class='list-group-item-text'>This company has a hotness level of:<%= companies[i].companyHotness %></span></br>
                 <span class='list-group-item-text'>You have been watching this company since:<%= companies[i].companyTime %></span></br>
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal<%= companies[i].companyName %>">
                   Edit Business Profile
                 </button>
 
                 <!-- Modal -->
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal fade" id="myModal<%= companies[i].companyName%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
                       <div class="modal-header">

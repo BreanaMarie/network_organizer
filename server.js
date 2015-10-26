@@ -48,7 +48,7 @@ app.get('/company_create', function(req, res){
 
 //set up where to render business profiles
 app.get('/businesses', function(req, res){
-	db.Company.find({}, function(err, companies){
+	db.Company.find({user:req.session.userId}, function(err, companies){
 		if (err) console.log(err);
 		res.render('businesses', {companies: companies});
 	});
@@ -66,9 +66,13 @@ app.get('/users', function (req, res){
 
 //set up where profiles render to
 app.get('/profile', function (req, res){
-	db.User.find({}, function(err, users){
+	db.User.findOne({_id: req.session.userId}, function(err, user){
+		console.log(user);
 		if(err) console.log(err);
-		res.render('profile', {users: users});
+		db.Company.find({user: req.session.userId}, function(err, companies){
+			if (err) console.log(err);	
+			res.render('profile', {user: user, companies: companies});
+		});
 	});
 });
 
@@ -128,6 +132,7 @@ var glassDoorUrl = 'http://api.glassdoor.com/api/api.htm?v=1'+ //address to glas
 
 //create post rout for new company added by user
 app.post('/companies', function(req, res){
+	req.body.user = req.session.user._id;
 	db.Company.create(req.body, function(err, company){
 		if (err){
 			console.log(err);
@@ -145,7 +150,7 @@ app.post('/users', function (req, res) {
 	// if(err){
 	// 	console.log(err);
 	// }
-	req.session.userId=user._id;
+	req.session.userId = user._id;
 	req.session.user = user;
 	res.json({users:users, msg: 'user created'});
 	});

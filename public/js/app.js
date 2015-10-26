@@ -75,10 +75,10 @@ function datechange(dateObject) {
 // handler for company create form with add to database
 $('#companyCreate').on('submit', function (e){
 	e.preventDefault();
-	//console.log("the button clicks");
+	console.log("the button clicks");
 
 	 var dateTime= new Date();
-	 $('#timeSubmit').attr('value', datechange(dateTime));
+	 $('#createdAt').attr('value', datechange(dateTime));
 
 	var formData = $(this).serialize();
 	console.log(formData);
@@ -117,43 +117,6 @@ $('#companyProfile').on('click', 'button.close', function (e){
 		});
 });
 
-//form validation for new user, to confirm password matches
-$('#signup').validate({
-    rules: {
-    	name:{
-    		required:true,
-    		minlength:2
-    	},
-    	email:{
-    		required:true,
-    		email:true
-    	},
-        password:{
-        	required:true,
-            minlength : 5
-        },
-        confirm : {
-        	required:true,
-            minlength : 5,
-            equalTo : "#password"
-        }
-    },
-    messages:{
-    	name:{
-    		required:"Please enter your name",
-    		minlength:"your user name must consit of 2 characters or more"
-    	},
-        password:{
-        	required:"you must enter a password",
-        	minlength:"Your password must be more than 5 characters"
-        },
-        confirm:{
-            required: "You must confirm your password",
-            minlength: "Your password must contain more than 5 characters",
-            equalTo: "Your Passwords Must Match" 
-        }
-    }
-});
 
 //event handler for sign up form add new user to database
 $('#signup').on('submit', function (e){

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!--want to say users name profile page -->
 	<title>Profile Page</title>
   <% include ./_connections %>
 
@@ -13,21 +12,12 @@
   <!--customized info box about the user-->
   <div id='userinfo'> 
   <ul>
-    <li>Welcome Back </br> <%= user[x].name %></li>
-    <li><p>You currently have <%= companies[x].length +1 %> that you are following right now.</p></li>
+    <li>Welcome Back </br> <%= user.name %></li>
+    <li><p>You currently have <%= companies.length +1 %> that you are following right now.</p></li>
   </ul>
     
   </div>
-  <div id='hotlist'>
-    <h2>Your 5 Hotest Companies right now are:</h2>
-    <%for (var i=0; i < companies[x].length; i++) { %>
-      <%if(company[x].companyHotness == 5){ %>
-    <ul>
-      <li class='list-group-item-text'><%= companies[x].companyName %></li></br>
-      <li class='list-group-item-text'><%= companies[x].companyHotness %></li></br>
-    </ul>
-    <%}%>
-  </div>
+ 
   <!-- three tabs representing the three folders () --> 
     <div id="files" data-toggle="tab">
 

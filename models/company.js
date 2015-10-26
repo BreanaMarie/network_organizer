@@ -2,16 +2,17 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
+
+
 var CompanySchema= mongoose.Schema({
-	companyName:String,
-	companyCity:String,
-	companyPhone:String,
-	companyEmail:String,
-	companyContact1:String,
-	companyContact2:String,
-	companyAddress:String,
-	companyHotness:String,
-	companyTime:String
+	name:String,
+	address:String,
+	city:String,
+	phone:String,
+	email:String,
+	createdAt:String,
+	hotness: String,
+	user : { type: String, ref: 'User' }
 });
 
 

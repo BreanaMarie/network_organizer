@@ -2,8 +2,12 @@
 <html>
 <head>
 	<title>Network Organizer</title>
-  <% include ./_connections %>
-
+  
+  <link rel="canonical" href="http://codepen.io/abergin/pen/ihlDf">
+  <link rel="stylesheet prefetch" href="//codepen.io/assets/reset/normalize.css">
+  <script src="//codepen.io/assets/editor/live/css_live_reload_init.js"></script>
+  <script src="//codepen.io/assets/libs/prefixfree.min.js"></script>
+<% include ./_connections %>
 </head>
 <body>
 <% include ./_navbar %>
@@ -26,22 +30,22 @@
           <%for (var i=0; i < companies.length; i++) { %>
             <div class="col-sm-6">
               <div id='<%= companies[i]._id %>' class='well'>
-                <h4 class="list-group-item-heading"><%= companies[i].companyName %></h4>
-                <span class='list-group-item-text'><%= companies[i].companyCity %></span></br>
-                <span class='list-group-item-text'><%= companies[i].companyPhone %></span></br>
-                <span class='list-group-item-text'><%= companies[i].companyEmail %></span></br>
-                <span class='list-group-item-text'><%= companies[i].companyContact1 %></span></br>
-                <span class='list-group-item-text'><%= companies[i].companyContact2 %></span></br>
-                <span class='list-group-item-text'><%= companies[i].companyAddress %></span></br>
-                <span class='list-group-item-text'>This company has a hotness level of:<%= companies[i].companyHotness %></span></br>
-                <span class='list-group-item-text'>You have been watching this company since:<%= companies[i].companyTime %></span></br>
+                <h4 class="list-group-item-heading"><%= companies[i].name %></h4>
+                <span class='list-group-item-text'><%= companies[i].city %></span></br>
+                <span class='list-group-item-text'><%= companies[i].phone %></span></br>
+                <span class='list-group-item-text'><%= companies[i].email %></span></br>
+                <span class='list-group-item-text'><%= companies[i].contact1 %></span></br>
+                <span class='list-group-item-text'><%= companies[i].contact2 %></span></br>
+                <span class='list-group-item-text'><%= companies[i].address %></span></br>
+                <span class='list-group-item-text'>This company has a hotness level of:<%= companies[i].hotness %></span></br>
+                <span class='list-group-item-text'>You have been watching this company since:<%= companies[i].createdAt %></span></br>
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal<%= companies[i].companyName %>">
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal<%= companies[i]._id %>">
                   Edit Business Profile
                 </button>
 
                 <!-- Modal -->
-                <div class="modal fade" id="myModal<%= companies[i].companyName%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal fade" id="myModal<%= companies[i]._id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
@@ -49,14 +53,32 @@
                         <h4 class="modal-title" id="myModalLabel"><%= companies[i].companyName %></h4>
                       </div>
                       <div class="modal-body">
-                        <h4 class="list-group-item-heading"><%= companies[i].companyName %></h4>
-                        <span class='list-group-item-text'><%= companies[i].companyCity %></span></br>
-                        <span class='list-group-item-text'><%= companies[i].companyPhone %></span></br>
-                        <span class='list-group-item-text'><%= companies[i].companyEmail %></span></br>
-                        <span class='list-group-item-text'><%= companies[i].companyContact1 %></span></br>
-                        <span class='list-group-item-text'><%= companies[i].companyContact2 %></span></br>
-                        <span class='list-group-item-text'><%= companies[i].companyAddress %></span></br>
-                        <span class='list-group-item-text'>This company has a hotness level of:<%= companies[i].companyHotness %></span></br>
+                        <form class='accordion'>
+                        <ul>
+                          <h4 class="list-group-item-heading"><%= companies[i].companyName %></h4>
+                          <li>
+                          <input type="checkbox" checked>
+                          <input type='text' name='companyName'></input>
+                          </li>
+
+                          <li>
+                              <input type="checkbox" checked>
+                              <i></i>
+                              <h2>Languages Used</h2>
+                              <p>This page was written in HTML and CSS. The CSS was compiled from SASS. I used Normalize as my CSS reset and -prefix-free to save myself some headaches. I haven't quite gotten the hang of Slim for compiling into HTML, but someday I'll use it since its syntax compliments that of SASS. Regardless, this could all be done in plain HTML and CSS.</p>
+                            </li>
+
+
+
+                          <span class='list-group-item-text'><%= companies[i].companyCity %></span></br>
+                          <span class='list-group-item-text'><%= companies[i].companyPhone %></span></br>
+                          <span class='list-group-item-text'><%= companies[i].companyEmail %></span></br>
+                          <span class='list-group-item-text'><%= companies[i].companyContact1 %></span></br>
+                          <span class='list-group-item-text'><%= companies[i].companyContact2 %></span></br>
+                          <span class='list-group-item-text'><%= companies[i].companyAddress %></span></br>
+                          <span class='list-group-item-text'>This company has a hotness level of:<%= companies[i].companyHotness %></span></br>
+                        </ul>
+                        </form>
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -10,12 +10,6 @@ var request = require('request');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 
-mongoose.connect(
-  process.env.MONGOLAB_URI ||
-  process.env.MONGOHQ_URL ||
-  'mongodb://localhost/pavement' // plug in the db name you've been using
-);
-
 //load secrets
 require('dotenv').load();
 

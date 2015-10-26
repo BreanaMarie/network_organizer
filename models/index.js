@@ -1,7 +1,12 @@
 //connect all the models here
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/pavement');
+// mongoose.connect('mongodb://localhost/pavement');
+mongoose.connect(
+  process.env.MONGOLAB_URI ||
+  process.env.MONGOHQ_URL ||
+  'mongodb://localhost/pavement' // plug in the db name you've been using
+);
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:')); 

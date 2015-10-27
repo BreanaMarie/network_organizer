@@ -31,11 +31,17 @@
       <input type="text" name='email' placeholder='Company Email'></input></br>
       <input type="text" name='contact1'placeholder='Company Contact'></input></br>
       <input type="text" name='contact2' placeholder='Company Additional Contact'></input></br>
-      <input type="radio" name='hotness' value="1">1</input>
+      <label>Add company to which file?</label></br>
+      <input type="radio" name='status' value="current" checked="checked">Current Companies</input>
+      <input type="radio" name='status' value="burner">Back Burner Companies</input>
+      <input type="radio" name='status' value="no_contact">Do Not Contact</input>
+      </br>
+      <label>Add a level of hotness to your company, so the most important ones are always on top</label></br>
+      <input type="radio" name='hotness' value="1">1 low priority</input>
       <input type="radio" name='hotness' value="2">2</input>
-      <input type="radio" name='hotness' value="3">3</input>
+      <input type="radio" name='hotness' value="3">3 </input>
       <input type="radio" name='hotness' value="4">4</input>
-      <input type="radio" name='hotness' value="5">5</input></br>
+      <input type="radio" name='hotness' value="5">5 highest priority</input></br>
       <input id="createdAt" type="hidden" name="createdAt" value=""></input>
   		<button type="submit">Submit</button>
   	</form>

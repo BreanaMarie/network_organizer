@@ -12,6 +12,7 @@ var CompanySchema= mongoose.Schema({
 	email:String,
 	createdAt:String,
 	hotness: String,
+	status:String,
 	user : { type: String, ref: 'User' }
 });
 

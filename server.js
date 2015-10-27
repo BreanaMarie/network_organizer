@@ -46,7 +46,23 @@ app.get('/company_create', function(req, res){
 	res.render('company_create');
 });
 
-//set up where to render business profiles
+//set up where to render specific company profiles
+// app.get('/company/:companies_id', function(req, res){
+// 	db.Company.find({user:req.session.userId}, function(err, companies){
+// 		if (err) console.log(err);
+// 		res.render('companies/:company_id', {companies: companies});
+// 	});
+// });
+//company show route
+app.get('/companies/:id', function (req, res){
+	//db.Company.find({user:req.session.userId}, function(err, company){
+	db.Company.findById(req.params.id, function (err, company){
+		console.log(req.params.id);
+		res.render('company', {company: company});
+	});
+});
+
+//set up where to render all business profiles
 app.get('/businesses', function(req, res){
 	db.Company.find({user:req.session.userId}, function(err, companies){
 		if (err) console.log(err);
@@ -93,16 +109,6 @@ app.get('/logout', function (req, res){
 	res.json({msg: "user has been logged out"});
 });
 
-//set render of user's profile
-// app.get('/user/:_id', function(req, res){
-// 	db.User.find({ 
-// 		_.id: req.params._id
-// 	}) 
-// 	.show(function(err, user){
-// 	 	if (err) console.log(err, user){
-// 		res.json('user', {users: users});
-// 	});
-// });
 
 //ability to delete company profiles
 app.delete('/companies/:_id', function(req, res){

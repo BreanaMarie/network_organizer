@@ -12,7 +12,7 @@
   <!--customized info box about the user-->
   <div id='userinfo' class="well col-sm-4"> 
   <h1><%= user.name %></h1>
-  <p>  This is your snap shot of your network.</p>
+  <p>  Here is your snap shot of your network.</p>
   </br>
   <p>You currently have <%= companies.length +1 %> that you are following right now.</p>
   </br>
@@ -31,7 +31,7 @@
             <h5 class="list-group-item-heading"><%= companies[i].name %></h5>
             <span class='list-group-item-text'><%= companies[i].city %></span></br>
             <span class='list-group-item-text'>This company has a hotness level of:<%= companies[i].hotness %></span></br>
-             <button name='<%= companies[i]._id %>' class="view_co"> View this company profile</button> 
+             <button name='<%= companies[i]._id %>' class="view_co"> View Profile</button> 
           </div>
         </div>
         <%}%>

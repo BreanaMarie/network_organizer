@@ -52,7 +52,7 @@ $('#companyProfile').on('click', 'button.close', function (e){
 	var profileId =$(this).data().id;
 	var deleteProfile =$(this).closest('div');
 		$.ajax({
-			url:'/companies/'+ profileId,
+			url:'companies/'+ profileId,
 			type: 'DELETE',
 		})
 		.done(function (data){
@@ -66,11 +66,24 @@ $('#companyProfile').on('click', 'button.close', function (e){
 });
 
 //event handler if button is clicked redirect to that company's profile
-$('#headlines').on('click', 'button.view_co', function (e){
+$('#headlines').on('click', '.view_co', function (e){
 	e.preventDefault();
 	console.log('co button clicked');
-	console.log($this);
-	//window.location.href = "businesses";
+	var object = ($('#headlines button.view_co').closest('div'));
+	var redirectid = (object[0].id);
+	console.log(redirectid);
+	$.ajax({
+		url:'/companies/'+ redirectid,
+		type: 'GET',
+	})
+	.done(function (data){
+		console.log(data);
+		console.log("successful redirect");
+		window.location.href="/companies/" + redirectid;
+	})
+	.fail(function (data){
+		console.log("failed to redirect");
+	});
 });
 
 

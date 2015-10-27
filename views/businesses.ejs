@@ -3,15 +3,15 @@
 <head>
 	<title>Network Organizer</title>
   
-  <link rel="canonical" href="http://codepen.io/abergin/pen/ihlDf">
-  <link rel="stylesheet prefetch" href="//codepen.io/assets/reset/normalize.css">
-  <script src="//codepen.io/assets/editor/live/css_live_reload_init.js"></script>
-  <script src="//codepen.io/assets/libs/prefixfree.min.js"></script>
 <% include ./_connections %>
 </head>
 <body>
 <% include ./_navbar %>
 <div class='container'>
+<h1>All your Company by File</h1>
+<p>Below you will find a list of all the companies you are following.  You can see more details about each company by clicking the 'View Profile" button or you can remove the company from your profile completely by clicking the delete button.</p>
+<h3>Use the files below to add additional filters to your companies you want to concentrait on.</h3>
+
   <div id='business_files'>
   <!-- three tabs representing the three folders (current, backburner, don't contact) --> 
     <div id="files" data-toggle="tab">
@@ -27,8 +27,9 @@
       <div id='companyProfile'class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="current">
           <h2>Current Companies You are Pursuing</h2>
+          <p>Current companies should be used for the companies you are activly networking with, and want to keep high on your radar.  Click on the 'View Profile" button to add even reminders like: send email greeting, set up interview or go to a networking event.</p>
           <%for (var i=0; i < companies.length; i++) { %>
-            <div class="col-sm-6">
+            <div class="col-sm-6 card">
               <div id='<%= companies[i]._id %>' class='well'>
                 <h4 class="list-group-item-heading"><%= companies[i].name %></h4>
                 <span class='list-group-item-text'><%= companies[i].city %></span></br>
@@ -39,54 +40,8 @@
                 <span class='list-group-item-text'><%= companies[i].address %></span></br>
                 <span class='list-group-item-text'>This company has a hotness level of:<%= companies[i].hotness %></span></br>
                 <span class='list-group-item-text'>You have been watching this company since:<%= companies[i].createdAt %></span></br>
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal<%= companies[i]._id %>">
-                  Edit Business Profile
-                </button>
-
-                <!-- Modal -->
-                <div class="modal fade" id="myModal<%= companies[i]._id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel"><%= companies[i].companyName %></h4>
-                      </div>
-                      <div class="modal-body">
-                        <form class='accordion'>
-                        <ul>
-                          <h4 class="list-group-item-heading"><%= companies[i].companyName %></h4>
-                          <li>
-                          <input type="checkbox" checked>
-                          <input type='text' name='companyName'></input>
-                          </li>
-
-                          <li>
-                              <input type="checkbox" checked>
-                              <i></i>
-                              <h2>Languages Used</h2>
-                              <p>This page was written in HTML and CSS. The CSS was compiled from SASS. I used Normalize as my CSS reset and -prefix-free to save myself some headaches. I haven't quite gotten the hang of Slim for compiling into HTML, but someday I'll use it since its syntax compliments that of SASS. Regardless, this could all be done in plain HTML and CSS.</p>
-                            </li>
-
-
-
-                          <span class='list-group-item-text'><%= companies[i].companyCity %></span></br>
-                          <span class='list-group-item-text'><%= companies[i].companyPhone %></span></br>
-                          <span class='list-group-item-text'><%= companies[i].companyEmail %></span></br>
-                          <span class='list-group-item-text'><%= companies[i].companyContact1 %></span></br>
-                          <span class='list-group-item-text'><%= companies[i].companyContact2 %></span></br>
-                          <span class='list-group-item-text'><%= companies[i].companyAddress %></span></br>
-                          <span class='list-group-item-text'>This company has a hotness level of:<%= companies[i].companyHotness %></span></br>
-                        </ul>
-                        </form>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <!--company profile button -->
+                <button name='<%= companies[i]._id %>' class="view_co"> View Profile</button> 
                 <!--delete button -->
                 <button data-id="<%=companies[i].id %>" class='close' aria-label='Close'><span aria-hidden='true'>Delete Profile</span></button>
               </div>
@@ -95,11 +50,13 @@
         </div>
         <div role="tabpanel" class="tab-pane" id="burner">
           <h2>Back Burner Companies</h2>
+          <p>This is a place for the companies that you want to keep in your profile but not work with right away.  When you are ready to be more active with this company, boost them up to 'Current Companies' file.  You can add reminders to this company by clicking the "View Profile" button</p>
           <div class="panel panel-default">
           </div>
         </div>
         <div role="tabpanel" class="tab-pane" id="no_contact">
           <h2>Do Not Contact List</h2>
+          <p>This file is a place for you to keep track of companies that you don't want to build a connection with, but also don't want to forget either.  When working with lots of companies in your network sometimes it is hard to keep everything straight and this folder can make sure you don't connect with someone you didn't want to.</p>
           <div class="panel panel-default">
           </div>
         </div>

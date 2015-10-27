@@ -8,12 +8,79 @@
 <body>
 <% include ./_navbar %>
 <div class='container col-sm-12'>
-  <div id='user_profile' >
-  <!--customized info box about the user-->
-  <div id='userinfo' class="well col-sm-4"> 
-Company profile here
+  <div id='companyinfo' class="well col-sm-4"> 
 
-
+  <h1><%= company.name %></h1>
+  <p>  You have been connected to this company since: <%= company.createdAt %></p>
+  </br>
+  <p></p>
+  </br>
+  <h3>Upcoming events</h3>
+  <p>coming soon a list of all of your reminders related to this specific company</p>
+    
+  </div>
+  <div id='company_profile' class='well col-sm-8'>
+    <h3 class="list-group-item-heading"><%= company.name %></h3>
+    <ul>
+      <li>
+        <span class='list-group-item-text'><%= company.address %></span></br>
+        <form id='changeAddress'>
+          <input type='text' name='address' placeholder='Address'></input>
+          <button id='changeAddressButton' type='submit'>Save</button>
+        </form>
+      </li>
+      <li>
+        <span class='list-group-item-text'><%= company.city %></span></br>
+        <form id='changeCity'>
+          <input type='text' name='city' placeholder='City'></input>
+          <button id='changeCityButton' type='submit'>Save</button>
+        </form>
+      </li>
+      <li>
+        <span class='list-group-item-text'><%= company.phone %></span></br>
+        <form id='changePhone'>
+          <input type='text' name='phone' placeholder='Phone'></input>
+          <button id='changePhoneButton' type='submit'>Save</button>
+        </form>
+      </li>
+      <li>
+        <span class='list-group-item-text'><%= company.email %></span></br>
+        <form id='changeEmail'>
+          <input type='text' name='email' placeholder='E-mail'></input>
+          <button id='changeEmailButton' type='submit'>Save</button>
+        </form>
+      </li>
+      <li>
+        <span class='list-group-item-text'><%= company.contact1 %></span></br>
+        <form id='changeContact1'>
+          <input type='text' name='contact1' placeholder='Contact 1'></input>
+          <button id='changeContact1Button' type='submit'>Save</button>
+        </form>
+      </li>
+      <li>
+        <span class='list-group-item-text'><%= company.contact2 %></span></br>
+        <form id='changeContact2'>
+          <input type='text' name='contact2' placeholder='Contact 2'></input>
+          <button id='changeContact2Button' type='submit'>Save</button>
+        </form>
+      </li>
+      <li>
+        <span class='list-group-item-text'>Hotness level of:<%= company.hotness %></span></br>
+        <form id='changeHotness'>
+          <input type="radio" name='hotness' value="1">1</input>
+          <input type="radio" name='hotness' value="2">2</input>
+          <input type="radio" name='hotness' value="3">3</input>
+          <input type="radio" name='hotness' value="4">4</input>
+          <input type="radio" name='hotness' value="5">5</input></br>
+          <button id='changeHotness' type='submit'>Save</button>
+        </form>
+      </li>
+    
+    
+    </ul>
+    <!--delete button -->
+     <button data-id="<%=company.id %>" class='close' aria-label='Close'><span aria-hidden='true'>Delete Profile</span></button>
+   </div>
 
  
 

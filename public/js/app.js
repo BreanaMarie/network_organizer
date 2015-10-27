@@ -46,11 +46,11 @@ $('#companyCreate').on('submit', function (e){
 		});
 });
 
-//event handler for the delete button remove from database
+//event handler for the delete button remove from database from businesses page
 $('#companyProfile').on('click', 'button.close', function (e){
 	e.preventDefault();
 	var profileId =$(this).data().id;
-	var deleteProfile =$(this).closest('div');
+	var deleteProfile =$(this).closest('div.card');
 		$.ajax({
 			url:'companies/'+ profileId,
 			type: 'DELETE',
@@ -65,19 +65,65 @@ $('#companyProfile').on('click', 'button.close', function (e){
 		});
 });
 
-//event handler if button is clicked redirect to that company's profile
+//event handler for the delete button remove from database from company profile page
+//added windows alert to user communicating delte and redirect to businesses page
+$('#company_profile').on('click', 'button.close', function (e){
+	e.preventDefault();
+	var profileId =$(this).data().id;
+	console.log("profile id is: ", profileId);
+	var deleteProfile =$(this).closest('div');
+		$.ajax({
+			url: profileId,
+			type: 'DELETE',
+		})
+		.done(function (data){
+			console.log(data);
+			$(deleteProfile).remove();
+			console.log("this company has been removed from your profile");
+			alert("This Company has been deleted");
+			window.location.href="/businesses";
+		})
+		.fail(function (data){
+			console.log("This company could not be deleted from your profile");
+		});
+});
+
+//event handler if button is clicked redirect to that company's profile 
+//from user profile page
 $('#headlines').on('click', '.view_co', function (e){
 	e.preventDefault();
-	console.log('co button clicked');
+	//console.log('co button clicked');
 	var object = ($('#headlines button.view_co').closest('div'));
 	var redirectid = (object[0].id);
-	console.log(redirectid);
+	//console.log(redirectid);
 	$.ajax({
 		url:'/companies/'+ redirectid,
 		type: 'GET',
 	})
 	.done(function (data){
-		console.log(data);
+		//console.log(data);
+		console.log("successful redirect");
+		window.location.href="/companies/" + redirectid;
+	})
+	.fail(function (data){
+		console.log("failed to redirect");
+	});
+});
+
+//event handler if button is clicked redirect to that company's profile
+//from businesses page
+$('#companyProfile').on('click', '.view_co', function (e){
+	e.preventDefault();
+	//console.log('co button clicked');
+	var object = ($('#companyProfile button.view_co').closest('div'));
+	var redirectid = (object[0].id);
+	//console.log(redirectid);
+	$.ajax({
+		url:'/companies/'+ redirectid,
+		type: 'GET',
+	})
+	.done(function (data){
+		//console.log(data);
 		console.log("successful redirect");
 		window.location.href="/companies/" + redirectid;
 	})

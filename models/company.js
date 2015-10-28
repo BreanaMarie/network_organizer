@@ -10,6 +10,8 @@ var CompanySchema= mongoose.Schema({
 	city:String,
 	phone:String,
 	email:String,
+	contact1:String,
+	contact2:String,
 	createdAt:String,
 	hotness: String,
 	status:String,

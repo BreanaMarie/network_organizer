@@ -50,6 +50,7 @@ $('#companyCreate').on('submit', function (e){
 $('#companyProfile').on('click', 'button.close', function (e){
 	e.preventDefault();
 	var profileId =$(this).data().id;
+	//console.log(profileId);
 	var deleteProfile =$(this).closest('div.card');
 		$.ajax({
 			url:'companies/'+ profileId,
@@ -70,7 +71,7 @@ $('#companyProfile').on('click', 'button.close', function (e){
 $('#company_profile').on('click', 'button.close', function (e){
 	e.preventDefault();
 	var profileId =$(this).data().id;
-	console.log("profile id is: ", profileId);
+	//console.log("profile id is: ", profileId);
 	var deleteProfile =$(this).closest('div');
 		$.ajax({
 			url: profileId,
@@ -93,8 +94,8 @@ $('#company_profile').on('click', 'button.close', function (e){
 $('#headlines').on('click', '.view_co', function (e){
 	e.preventDefault();
 	//console.log('co button clicked');
-	var object = ($('#headlines button.view_co').closest('div'));
-	var redirectid = (object[0].id);
+	var object = $(this).data();
+	var redirectid = object.id;
 	//console.log(redirectid);
 	$.ajax({
 		url:'/companies/'+ redirectid,
@@ -112,12 +113,11 @@ $('#headlines').on('click', '.view_co', function (e){
 
 //event handler if button is clicked redirect to that company's profile
 //from businesses page
-$('#companyProfile').on('click', '.view_co', function (e){
+$('#companyProfile').on('click', 'button.view_co', function (e){
 	e.preventDefault();
-	//console.log('co button clicked');
-	var object = ($('#companyProfile button.view_co').closest('div'));
-	var redirectid = (object[0].id);
-	//console.log(redirectid);
+	console.log('co button clicked');
+	var object =$(this).data();
+	var redirectid = object.id;
 	$.ajax({
 		url:'/companies/'+ redirectid,
 		type: 'GET',
@@ -130,6 +130,53 @@ $('#companyProfile').on('click', '.view_co', function (e){
 	.fail(function (data){
 		console.log("failed to redirect");
 	});
+});
+
+function editViews (edit){
+	$('.profile').show();
+	$('.editing').hide();
+}
+
+editViews();
+// handler for company edit profile button when clicked display edit fields
+$('#company_profile').on('click', '.profile', function (e){
+	e.preventDefault();
+	console.log('the edit button clicks');
+	$('.profile').hide();
+	$('.editing').show();
+});
+
+//handler for company cancel button changes, display fields back to profile
+$('#company_profile').on('click', '.cancel', function (e){
+	e.preventDefault();
+	console.log('the cancel button clicks');
+	$('.profile').show();
+	$('.editing').hide();
+});
+
+//handler for the save button on editing profile
+$('#company_profile').on('submit', function (e){
+	e.preventDefault();
+	console.log("the save button clicks");
+
+	var formData = $(this).serialize();
+	//console.log(formData);
+
+		$.ajax({
+			url:'/companies',
+			type:'PUT',
+			data: formData
+		})
+		.done(function (data){
+			console.log("company has been updated");
+			$('.profile').show();
+			$('.editing').hide();
+			location.reload();
+
+		})
+		.fail(function (data){
+			console.log("failed to update company");
+		});
 });
 
 

@@ -24,3 +24,12 @@ body{
 #files {
 	clear: both;
 }
+
+#content{
+	clear:both;
+}
+
+#company_profile li{
+	list-style-type: none;
+}
+

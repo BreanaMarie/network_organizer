@@ -19,71 +19,69 @@
   <p>coming soon a list of all of your reminders related to this specific company</p>
     
   </div>
-  <div id='company_profile' class='well col-sm-8'>
+  <div class='well col-sm-8 silly'>
+  <form id='company_profile'>
     <h3 class="list-group-item-heading"><%= company.name %></h3>
     <ul>
       <li>
         <span class='list-group-item-text'><%= company.address %></span></br>
-        <form id='changeAddress'>
-          <input type='text' name='address' placeholder='Address'></input>
-          <button id='changeAddressButton' type='submit'>Save</button>
-        </form>
+          <label class='editing'>Company Address</label>
+          <input id='changeAddress' class='editing' type='text' name='address' value='<%= company.address %>'></input>
       </li>
       <li>
         <span class='list-group-item-text'><%= company.city %></span></br>
-        <form id='changeCity'>
-          <input type='text' name='city' placeholder='City'></input>
-          <button id='changeCityButton' type='submit'>Save</button>
-        </form>
+          <label class='editing'>Company City</label>
+          <input id='changeCity' class='editing' type='text' name='city' value='<%= company.city %>'></input>
       </li>
       <li>
         <span class='list-group-item-text'><%= company.phone %></span></br>
-        <form id='changePhone'>
-          <input type='text' name='phone' placeholder='Phone'></input>
-          <button id='changePhoneButton' type='submit'>Save</button>
-        </form>
+          <label class='editing'>Company Phone</label>
+          <input id='changePhone' class='editing' type='text' name='phone' value='<%= company.phone %>'></input>
       </li>
       <li>
         <span class='list-group-item-text'><%= company.email %></span></br>
-        <form id='changeEmail'>
-          <input type='text' name='email' placeholder='E-mail'></input>
-          <button id='changeEmailButton' type='submit'>Save</button>
-        </form>
+          <label class='editing'>Company E-mail</label>
+          <input id='changeEmail' class='editing' type='text' name='email' value='<%= company.email %>'></input>
       </li>
       <li>
         <span class='list-group-item-text'><%= company.contact1 %></span></br>
-        <form id='changeContact1'>
-          <input type='text' name='contact1' placeholder='Contact 1'></input>
-          <button id='changeContact1Button' type='submit'>Save</button>
-        </form>
+          <label class='editing'>Company Contact 1</label>
+          <input id='changeContact1' class='editing' type='text' name='contact1' value='<%= company.contact1 %>'></input>
       </li>
       <li>
         <span class='list-group-item-text'><%= company.contact2 %></span></br>
-        <form id='changeContact2'>
-          <input type='text' name='contact2' placeholder='Contact 2'></input>
-          <button id='changeContact2Button' type='submit'>Save</button>
-        </form>
+          <label class='editing'>Company Contact 2</label>
+          <input id='changeContact2' class='editing' type='text' name='contact2' value='<%= company.contact2 %>'></input>
       </li>
       <li>
+        <span class='list-group-item-text'>Company is currently filed under: <%= company.status %></span></br>
+          <label class='editing'>Company File</label></br>
+          <input class='editing' type="radio" name='status' value="current" checked="checked">Current Companies</input>
+          <input class='editing' type="radio" name='status' value="burner">Back Burner Companies</input>
+          <input class='editing' type="radio" name='status' value="no_contact">Do Not Contact</input>
+      </li>
+      <li id='changeHotness'>
         <span class='list-group-item-text'>Hotness level of:<%= company.hotness %></span></br>
-        <form id='changeHotness'>
-          <input type="radio" name='hotness' value="1">1</input>
-          <input type="radio" name='hotness' value="2">2</input>
-          <input type="radio" name='hotness' value="3">3</input>
-          <input type="radio" name='hotness' value="4">4</input>
-          <input type="radio" name='hotness' value="5">5</input></br>
-          <button id='changeHotness' type='submit'>Save</button>
-        </form>
+          <label class='editing'>Company Hotness Level</label>
+          <input class='editing' type="radio" name='hotness' value="1">1</input>
+          <input class='editing' type="radio" name='hotness' value="2">2</input>
+          <input class='editing' type="radio" name='hotness' value="3">3</input>
+          <input class='editing' type="radio" name='hotness' value="4">4</input>
+          <input class='editing' type="radio" name='hotness' value="5">5</input></br>
       </li>
     
     
     </ul>
+    <!--cancel edit profile  button -->
+     <button data-id="<%=company.id %>" class='editing cancel' aria-label='Close'><span aria-hidden='true'>Cancel</span></button>
+    <!--save profile edits button -->
+     <button data-id="<%=company.id %>" class='editing save' aria-label='Close'><span aria-hidden='true' type='submit'>Save Changes</span></button>
+    <!--edit profile  button -->
+     <button data-id="<%=company.id %>" class='profile' aria-label='Close'><span aria-hidden='true'>Edit Profile</span></button>
     <!--delete button -->
      <button data-id="<%=company.id %>" class='close' aria-label='Close'><span aria-hidden='true'>Delete Profile</span></button>
    </div>
-
- 
-
+   </form>
 
   </div>
   </div>

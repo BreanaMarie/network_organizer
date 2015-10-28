@@ -5,7 +5,7 @@ $(document).ready(function(){
 var currentName='';
 function checkAuth() {
 	$.get('/currentUser', function (data){
-		console.log(data);
+		//console.log(data);
 		if (data.user){
 			currentName=data.user.name;
 			$('.noUser').hide();

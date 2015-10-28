@@ -10,6 +10,8 @@ var request = require('request');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 
+//api
+var requestOptions={};
 //load secrets
 require('dotenv').load();
 
@@ -18,6 +20,7 @@ app.set('view engine', 'ejs');
 app.use('/static', express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
+
 //set sessions to save to database to preserve login on refresh 
 app.use(session({
 	saveUninitialized: true,
@@ -28,7 +31,6 @@ app.use(session({
 	ttl: 2 * 24 * 60 * 60,
 	cookie: {maxAge: 6000000}
 }));
-
 
 var db = require('./models/index.js');
 
@@ -46,13 +48,7 @@ app.get('/company_create', function(req, res){
 	res.render('company_create');
 });
 
-//set up where to render specific company profiles
-// app.get('/company/:companies_id', function(req, res){
-// 	db.Company.find({user:req.session.userId}, function(err, companies){
-// 		if (err) console.log(err);
-// 		res.render('companies/:company_id', {companies: companies});
-// 	});
-// });
+
 //company show route
 app.get('/companies/:id', function (req, res){
 	//db.Company.find({user:req.session.userId}, function(err, company){
@@ -122,19 +118,6 @@ app.delete('/companies/:_id', function(req, res){
 	});
 });
 
-//connection to glassdoor api 
-var glassDoorUrl = 'http://api.glassdoor.com/api/api.htm?v=1'+ //address to glassdors API
-'&format=json'+ //format is JSON 
-'&t.p=' + partnerId + //Partner ID used for access to glassdoor
-'&t.k='+ key +// key used for access to glassdoor
-'&action=employers'+//looking at employers
-'&q=pharmaceuticals'+ //query  filled in by user, set variable here
-'&userip=38.140.30.202'+ //my own ip make this a variable
-'&useragent=Mozilla/%2F4.0';
-
-//get information from form to be passed into glassdoor api
-
-//get request to glassdoor api for business
 
 //create post rout for new company added by user
 app.post('/companies', function(req, res){
@@ -175,6 +158,18 @@ app.post('/login', function (req, res){
 		console.log(user);
 		res.json(user);
 	}
+	});
+});
+
+//create a rout to change company profile informatin
+app.put('/companies', function(req, res){
+	req.body.user = req.session.user._id;
+	//console.log(req.body);
+	db.Company.update(req.body, function(err, company){
+		if (err){
+			console.log(err);
+		}
+	res.json(company);
 	});
 });
 

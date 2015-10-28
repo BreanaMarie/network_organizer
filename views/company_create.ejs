@@ -12,7 +12,7 @@
     <h1>Create a New Company Record for your files</h1>
     <h3>Search with Glassdoor to find to add to your network</h3>
     <p>Use the fields below to search companies by location or by industry.</p>
-    <form>
+    <form action='/search'> <!-- api search -->
       <label>Search by City or State</label>
       <input type='text' placeholder='Enter an Area or City'></input>
       </br>
@@ -30,7 +30,7 @@
       <input type="text" name='phone' placeholder='Company Phone'></input></br>
       <input type="text" name='email' placeholder='Company Email'></input></br>
       <input type="text" name='contact1'placeholder='Company Contact'></input></br>
-      <input type="text" name='contact2' placeholder='Company Additional Contact'></input></br>
+      <input type="text" name='contact2' placeholder='Additional Contact'></input></br>
       <label>Add company to which file?</label></br>
       <input type="radio" name='status' value="current" checked="checked">Current Companies</input>
       <input type="radio" name='status' value="burner">Back Burner Companies</input>

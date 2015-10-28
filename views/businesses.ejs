@@ -30,8 +30,8 @@
           <p>Current companies should be used for the companies you are activly networking with, and want to keep high on your radar.  Click on the 'View Profile" button to add even reminders like: send email greeting, set up interview or go to a networking event.</p>
           <%for (var i=0; i < companies.length; i++) { %>
             <% if (companies[i].status === 'current'){ %>
-              <div class="col-sm-6 card">
-                <div id='<%= companies[i]._id %>' class='well'>
+              <div class="col-sm-6">
+                <div id='<%= companies[i]._id %>' class='well card'>
                   <h4 class="list-group-item-heading"><%= companies[i].name %></h4>
                   <span class='list-group-item-text'><%= companies[i].city %></span></br>
                   <span class='list-group-item-text'><%= companies[i].phone %></span></br>
@@ -53,11 +53,10 @@
         <div role="tabpanel" class="tab-pane" id="burner">
           <h2>Back Burner Companies</h2>
           <p>This is a place for the companies that you want to keep in your profile but not work with right away.  When you are ready to be more active with this company, boost them up to 'Current Companies' file.  You can add reminders to this company by clicking the "View Profile" button</p>
-          <div class="panel panel-default">
           <%for (var i=0; i < companies.length; i++) { %>
             <% if (companies[i].status === 'burner'){ %>
-              <div class="col-sm-6 card">
-                <div id='<%= companies[i]._id %>' class='well'>
+              <div class="col-sm-6">
+                <div id='<%= companies[i]._id %>' class='well card'>
                   <h4 class="list-group-item-heading"><%= companies[i].name %></h4>
                   <span class='list-group-item-text'><%= companies[i].city %></span></br>
                   <span class='list-group-item-text'><%= companies[i].phone %></span></br>
@@ -75,16 +74,14 @@
               </div>
               <% } %>
           <% } %>
-          </div>
         </div>
         <div role="tabpanel" class="tab-pane" id="no_contact">
           <h2>Do Not Contact List</h2>
           <p>This file is a place for you to keep track of companies that you don't want to build a connection with, but also don't want to forget either.  When working with lots of companies in your network sometimes it is hard to keep everything straight and this folder can make sure you don't connect with someone you didn't want to.</p>
-          <div class="panel panel-default">
           <%for (var i=0; i < companies.length; i++) { %>
             <% if (companies[i].status === 'no_contact'){ %>
-              <div class="col-sm-6 card">
-                <div id='<%= companies[i]._id %>' class='well'>
+              <div class="col-sm-6">
+                <div id='<%= companies[i]._id %>' class='well card'>
                   <h4 class="list-group-item-heading"><%= companies[i].name %></h4>
                   <span class='list-group-item-text'><%= companies[i].city %></span></br>
                   <span class='list-group-item-text'><%= companies[i].phone %></span></br>
@@ -102,7 +99,6 @@
               </div>
               <% } %>
           <% } %>
-          </div>
         </div>
     </div>
   </div>

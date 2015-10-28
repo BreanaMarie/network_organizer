@@ -1,35 +1,170 @@
-body{
-	background-image: url('../images/network.jpg');
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-image: center;
-	background-size: 100%;
+html, body {
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+background-color: #7c6d5e;
+background-image: url('../images/splashround.jpg');
+background-repeat: no-repeat;
+background-attachment: fixed;
+background-image: center;
+background-size: 100% 100% ;
+}
+
+/*home page */
+#wrapper{
+
 	color:black;
+}
+
+.jumbotron{
+	background: transparent;
+	color:white;
+	text-shadow: 2px 2px #72171d;
+	margin-top: 90px;
+}
+#tagline{
+	margin-top: -40px;
+}
+
+#footer{
+	height: 100px;
+}
+
+/* nav bar break down*/
+
+@media (max-width: 860px) {
+    .navbar-header {
+        float: none;
+    }
+    .navbar-toggle {
+        display: block;
+    }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .navbar-nav {
+        float: none!important;
+        margin: 7.5px -15px;
+    }
+    .navbar-nav>li {
+        float: none;
+    }
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}
+
+.navbar{
+	background: transparent;
+	background:rgba(255, 255, 255, 0.3);
+	border-color: transparent;
+	color: black;
+}
+
+.navbar-nav > li > a {
+    color: black;
 }
 
 #welcome_message{
 	margin-top: 10px;
 	font-size: 20px;
-	margin-right: 10px;
 }
 
 .noUser{
 	display: none;
 }
 
+
+/* user profile */
 #headlines {
-	float: right;
+	background-color: #acc3ba;
+
 }
 
 #files {
 	clear: both;
 }
 
-#content{
+#usercontent{
 	clear:both;
+
+}
+
+#usercontent h1 a{
+	color: #d1c6a8;
+	text-shadow: 1px 1px #72171d;
 }
 
 #company_profile li{
 	list-style-type: none;
 }
 
+#userinfo {
+	background-color: #d1c6a8;
+}
+
+/* company profile*/
+
+#companysidenav{
+	background-color: #d1c6a8;
+}
+
+#companycontent{
+	background-color: #acc3ba;
+}
+
+/* businesses page navigation tabs */
+.nav-tabs > li > a{
+  border: medium none;
+  background-color: rgba(255,255,255,0.1);
+}
+.nav-tabs > li.active > a{
+  	background-color: #d1c6a8;
+    border: medium none;
+    color:#fff;
+} 
+
+.nav-tabs > li > a:hover{
+  	background-color: #d1c6a8;
+    border: medium none;
+    color:#fff;
+}
+
+#current .card {
+	border-color: #d1c6a8;
+	background-color: #acc3ba;
+	padding-top: 15px;
+}
+
+#current h2{
+	color: #d1c6a8;
+	text-shadow: 1px 1px #72171d;
+}
+
+#burner .card {
+	border-color: #d1c6a8;
+	background-color: #acc3ba;
+	padding-top: 15px;
+}
+
+#burner h2{
+	color: #d1c6a8;
+	text-shadow: 1px 1px #72171d;
+}
+
+#no_contact .card {
+	border-color: #d1c6a8;
+	background-color: #ebe8e5;
+	padding-top: 15px;
+}
+
+#no_contact h2{
+	color: #ebe8e5;
+	text-shadow: 1px 1px #72171d;
+}

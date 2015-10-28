@@ -6,40 +6,27 @@
 
 </head>
 <body>
-<% include ./_navbar %>
-<div class='jumbotron'>
-  <div class="container">
-    <h1>Network Organizer</h1>
-    <h2>A Job Search Organizer</h2>
+<div id='wrapper'>
+  <% include ./_navbar %>
+  <div class='jumbotron'>
+    <div class="container">
+      <h1>Network Organizer</h1>
+      <h2>A Job Search Organizer</h2>
+    </div>
+  </div>
+  <div id='tagline' class='container'>
+    <div>
+      <h1>We keep track of your connections so you can concentrait on building your network</h1>
+      <p>Take a look at businesses in your area</p>
+    	<form id='businessType' class='col-md-10'>
+    		<input type="text" name='typeQuery'></input>
+    		<button type="submit">Submit</button>
+    	</form>
+    </div>
+    <div id='footer'class='col-md-12'>
+    	<p>organizing people who are serious about finding a job</p>
+    </div>
   </div>
 </div>
-<div class='container'>
-  <div>
-    <h1>We keep track of your job searchs so you can concentrait on getting the job</h1>
-    <p>Take a look at businesses in your area</p>
-  	<form id='businessType' class='col-md-10'>
-  		<input type="text" name='typeQuery'></input>
-  		<button type="submit">Submit</button>
-  	</form>
-  	<div id='profile models' class='col-md-12'>
-  		<div id='profile1' class='col-md-3'>
-  			<p>predone profile One coming soon</p>
-  			
-  		</div>
-  		<div id='profile2' class='col-md-3'>
-  			<p>predone profile Two coming soon</p>
-  		</div>
-  		<div id='profile3' class='col-md-3'>
-  			<p>predone profile Three coming soon</p>
-  		</div>
-  	</div>
-  </div>
-  <div id='footer'class='col-md-12'>
-  	<p>organizing people who are serious about finding a job</p>
-  </div>
-	
-</div>
-
-
 </body>
 </html>

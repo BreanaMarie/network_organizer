@@ -1,3 +1,6 @@
+console.log("the validation form is connected");
+
+$(document).ready(function(){
 //form validation for new user, to confirm password matches
 $('#signup').validate({
     rules: {
@@ -56,4 +59,6 @@ $('#companyCreate').validate({
         },
 
     }
+});
+
 });

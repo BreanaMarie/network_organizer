@@ -178,7 +178,43 @@ $('#company_profile').on('submit', function (e){
 			console.log("failed to update company");
 		});
 });
+;
 
+$.get('ajax/results', function (JSONbody){
+	$('#queryResults').html(JSONbody);
+});
+
+//open form to post api query results to database
+$('#queryResults').on('click', function (e){
+	e.preventDefault();
+	console.log('the add query results to database button clicks');
+	$('.query').hide();
+	$('.add').show();
+});
+
+//handler for saving glassdoor search restults to the database
+$('#queryResults').on('click', 'addApiQuery', function (e){
+	e.preventDefault();
+	console.log("the save api button clicks");
+
+	var formData = $(this).serialize();
+	//console.log(formData);
+
+		$.ajax({
+			url:'/companies',
+			type:'POST',
+			data: formData
+		})
+		.done(function (data){
+			console.log("company has been added to the database");
+			var redirectid = $(this).data().id;
+			window.location.href="/companies/" + redirectid;
+
+		})
+		.fail(function (data){
+			console.log("failed to add this company");
+		});
+});
 
 });
 

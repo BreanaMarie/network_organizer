@@ -1,17 +1,25 @@
-html, body {
+body {
 -webkit-background-size: cover;
 -moz-background-size: cover;
 -o-background-size: cover;
 background-size: cover;
 background-color: #7c6d5e;
-background-image: url('../images/splashround.jpg');
-background-repeat: no-repeat;
-background-attachment: fixed;
-background-image: center;
-background-size: 100% 100% ;
 }
 
 /*home page */
+body#homepage {
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	background-color: #7c6d5e;
+	background-image: url('../images/splashround.jpg');
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-image: center;
+	background-size: 100% 100% ;
+}
+
 #wrapper{
 
 	color:black;
@@ -82,9 +90,14 @@ background-size: 100% 100% ;
 
 
 /* user profile */
-#headlines {
-	background-color: #acc3ba;
+#headlines h3 {
+	color: #d1c6a8;
+	text-shadow: 1px 1px #72171d;
+	background-color: transparent;
 
+}
+.hot {
+	background-color: #acc3ba; 
 }
 
 #files {

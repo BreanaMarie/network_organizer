@@ -8,8 +8,39 @@
 <body>
 <div id='resultsWrapper'>
 <% include ./_navbar %>
+<div>
+	<form id='apiSearchCity' method='POST' action='/search'> <!-- api search -->
+	  <label>Search by City or State</label>
+	  <input type='text' name='queryInput' placeholder='Enter an Area or City'></input>
+	  <button type="submit">Search</button>
+	  </form>
+	  </br>
+	  <form id='apiSearchInd' method='POST' action='/search'>
+	  <label>Or Search by Industry</label>
+	  <input type='text' placeholder='Enter an Industry'></input>
+	  <button type="submit">Search</button>
+	</form>
+</div>
 	<div id='queryResults'>
-		<%=alldata%>
+		
+		<%for (var i=0; i < JSONbody.response.employers.length; i++) { %>
+		    <div class="col-sm-6">
+		      <div id='<%= JSONbody.response.employers[i].id %>' class='well card'>
+		      <form id='addApiQuery'>
+		      <li>
+		        <span class='list-group-item-text query'><h4><%= JSONbody.response.employers[i].name %></h4></span></br>
+		          <label class='add'>Company Name:</label>
+		          <input id='name' class='add' type='text' name='name' value='<%= JSONbody.response.employers[i].name %>'></input>
+		      
+		        <h4 class="list-group-item-heading"></h4>
+		        <span class='list-group-item-text'><%= JSONbody.response.employers[i].overallRating %></span></br>
+		        <span class='list-group-item-text'><%= JSONbody.response.employers[i].website %></span></br>
+		        <span class='list-group-item-text'><%= JSONbody.response.employers[i].squareLogo %></span></br>
+		        <!--add company to database button -->
+		        <button data-id='' class="view_co"> Add File</button> 
+		      </div>
+		    </div>
+		<% } %>
 	</div>
 </div>
 

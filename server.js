@@ -50,12 +50,10 @@ var glassDoorUrl = 'http://api.glassdoor.com/api/api.htm?v=1'+ //address to glas
 '&userip=38.140.30.202'+ //my own ip make this a variable
 '&useragent=Mozilla/%2F4.0';
 
-//set rout for results page
-app.get('/results', function (req, res){
-	res.render('results');
-});
 
-app.post('/search', function (req, res){
+//pull data in from api
+var JSONbody = '';
+app.post('/searches', function (req, res){
 	console.log(req.body);
 	console.log(req.body.queryInput);
 	var queryStringObj = {
@@ -68,13 +66,38 @@ app.post('/search', function (req, res){
 		qs:queryStringObj
 	};
 	request.get(requestOptions, function (error, apiResponse, body){
-		var JSONbody = JSON.parse(body);
-		res.json(JSONbody);
-		//res.redirect('/results');
+		JSONbody = JSON.parse(body);
+		
+		res.redirect('/results');
+	
 	});
 	
 });
 
+//set rout for results page
+app.get('/results', function (req, res){
+	db.User.findOne({_id: req.session.userId}, function(err, user){
+		console.log(user);
+		if(err) console.log(err);
+	// searches.find({searches: searches}, function(err, searches){
+	// 		if (err) console.log(err);	
+	res.render('results', {JSONbody: JSONbody});
+	});
+	// });
+});
+
+// app.post('/results', function (req, res){
+// 	console.log(req.body);
+// 	req.body.user = req.session.user._id;
+// 	JSONbody.show(req.body, function(err, searches){
+// 		if (err){
+// 			console.log(err);
+// 		}
+// 	res.json(JSONbody);
+// 		//res.redirect('/results');
+// 	});
+	
+// });
 // app.post('/search', function (req, res){
 // 	console.log(req.body);
 // 	console.log(req.body.queryInput);
@@ -224,11 +247,11 @@ app.post('/login', function (req, res){
 	});
 });
 
-//create a rout to change company profile informatin
+//create a rout to change company profile information
 app.put('/companies', function(req, res){
 	req.body.user = req.session.user._id;
 	//console.log(req.body);
-	db.Company.update(req.body, function(err, company){
+	db.Company.update(req.body, function (err, company){
 		if (err){
 			console.log(err);
 		}

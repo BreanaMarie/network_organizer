@@ -16,7 +16,7 @@
         <h1><%= user.name %></h1>
         <p>  Here is your snap shot of your network.</p>
         </br>
-        <p>You currently have <strong><%= companies.length +1 %></strong> that you are following right now.</p>
+        <p>You currently have <strong><%= companies.length +1 %></strong> companies that you are following right now.</p>
         <p>Take a look at all the companies you are following in your <a href="/businesses">Company Files</a>.</p>
         </br>
         <h3>Upcoming events</h3>
@@ -25,13 +25,13 @@
     </div>
     <!--customized headline box about user companies-->
     <div class='col-sm-8'>
-      <div id="headlines" class='well'>
-          <h3>Companies from your hot list</h3>
+      <div id="headlines" class=''>
+          <h3>Companies from your hot list:</h3>
           <%for (var i=0; i < companies.length; i++) { %>
             <% if (companies[i].status == 'current'){ %>
               <% if (companies[i].hotness ==5) { %>
               <div class="col-sm-11">
-                <div id='<%= companies[i]._id %>' class='well'>
+                <div id='<%= companies[i]._id %>' class='well hot'>
                   <h5 class="list-group-item-heading"><%= companies[i].name %></h5>
                   <span class='list-group-item-text'><%= companies[i].city %></span></br>
                   <span class='list-group-item-text'>This company has a hotness level of:<%= companies[i].hotness %></span></br>

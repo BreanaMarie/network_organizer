@@ -12,10 +12,13 @@
     <h1>Create a New Company Record for your files</h1>
     <h3>Search with Glassdoor to find to add to your network</h3>
     <p>Use the fields below to search companies by location or by industry.</p>
-    <form action='/search'> <!-- api search -->
+    <form id='apiSearchCity' method='POST' action='/search'> <!-- api search -->
       <label>Search by City or State</label>
-      <input type='text' placeholder='Enter an Area or City'></input>
+      <input type='text' name='queryInput' placeholder='Enter an Area or City'></input>
+      <button type="submit">Search</button>
+      </form>
       </br>
+      <form id='apiSearchInd' method='POST' action='/search'>
       <label>Or Search by Industry</label>
       <input type='text' placeholder='Enter an Industry'></input>
       <button type="submit">Search</button>

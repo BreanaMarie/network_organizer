@@ -68,7 +68,7 @@ $('#signup').on('submit', function (e){
 				console.log("created user");
 				window.location.href = "profile";
 				//hide sign up and login buttons	
-				//checkAuth();
+				checkAuth();
 			})
 			.fail(function (data){
 				console.log("failed to create new user");

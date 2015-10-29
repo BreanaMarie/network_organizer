@@ -10,8 +10,7 @@ var request = require('request');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 
-//api
-var requestOptions={};
+
 //load secrets
 require('dotenv').load();
 
@@ -33,10 +32,74 @@ app.use(session({
 }));
 
 var db = require('./models/index.js');
+request.debug=true;
 
+//api
+var requestOptions={};
 //set api access variables
 partnerId=process.env.partnerId;
 key=process.env.key;
+
+//connection to glassdoor api 
+var glassDoorUrl = 'http://api.glassdoor.com/api/api.htm?v=1'+ //address to glassdors API
+'&format=json'+ //format is JSON 
+'&t.p=' + partnerId + //Partner ID used for access to glassdoor
+'&t.k='+ key +// key used for access to glassdoor
+'&action=employers'+//looking at employers
+'&q=pharmaceuticals'+ //query  filled in by user, set variable here
+'&userip=38.140.30.202'+ //my own ip make this a variable
+'&useragent=Mozilla/%2F4.0';
+
+//set rout for results page
+app.get('/results', function (req, res){
+	res.render('results');
+});
+
+app.post('/search', function (req, res){
+	console.log(req.body);
+	console.log(req.body.queryInput);
+	var queryStringObj = {
+		q: req.body.queryInput,
+		api_key: process.env.key
+	};
+	var requestOptions = {
+		url: glassDoorUrl,
+		methood:'GET',
+		qs:queryStringObj
+	};
+	request.get(requestOptions, function (error, apiResponse, body){
+		var JSONbody = JSON.parse(body);
+		res.json(JSONbody);
+		//res.redirect('/results');
+	});
+	
+});
+
+// app.post('/search', function (req, res){
+// 	console.log(req.body);
+// 	console.log(req.body.queryInput);
+// 	var queryStringObj = {
+// 		q: req.body.queryInput,
+// 		api_key: process.env.key
+// 	};
+// 	var requestOptions = {
+// 		url: glassDoorUrl,
+// 		methood:'GET',
+// 		qs:queryStringObj
+// 	};
+// 	request.get(requestOptions, function (error, apiResponse, body){
+// 		var JSONbody = JSON.parse(body);
+// 		res.render('results', {alldata: JSONbody});
+// 		//res.redirect('/results');
+// 	});
+	
+// });
+//get information from form to be passed into glassdoor api
+
+//get request to glassdoor api for business
+
+
+
 
 //set up where to render home page
 app.get('/', function(req, res){
@@ -89,7 +152,7 @@ app.get('/profile', function (req, res){
 });
 
 //set up current user rout
-app.get('/currentUser', function(req, res){
+app.get('/currentUser', function (req, res){
 	res.json({user: req.session.user});
 });
 

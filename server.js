@@ -40,14 +40,15 @@ var requestOptions={};
 partnerId=process.env.partnerId;
 key=process.env.key;
 
+
 //connection to glassdoor api 
 var glassDoorUrl = 'http://api.glassdoor.com/api/api.htm?v=1'+ //address to glassdors API
 '&format=json'+ //format is JSON 
 '&t.p=' + partnerId + //Partner ID used for access to glassdoor
 '&t.k='+ key +// key used for access to glassdoor
 '&action=employers'+//looking at employers
-'&q=pharmaceuticals'+ //query  filled in by user, set variable here
-'&userip=38.140.30.202'+ //my own ip make this a variable
+'&q='+  //query  filled in by user, set variable here
+'&userip='+ // leave blank for now
 '&useragent=Mozilla/%2F4.0';
 
 

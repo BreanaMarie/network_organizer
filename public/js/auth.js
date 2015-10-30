@@ -54,11 +54,10 @@ $('#logout').on('click', function (e){
 //event handler for sign up form add new user to database
 $('#signup').on('submit', function (e){
 	e.preventDefault();
-	//console.log("form submitted");
+	console.log("sign up form submitted");
 	
 		var userData = $(this).serialize();
 		console.log(userData);
-
 			$.ajax({
 				url:'/users',
 				type:'POST',

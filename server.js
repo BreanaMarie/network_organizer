@@ -9,6 +9,7 @@ var mongoose = require('mongoose');
 var request = require('request');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
+var flash = require('connect-flash');
 
 
 //load secrets
@@ -19,6 +20,7 @@ app.set('view engine', 'ejs');
 app.use('/static', express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(flash());
 
 //set sessions to save to database to preserve login on refresh 
 app.use(session({
@@ -87,40 +89,6 @@ app.get('/results', function (req, res){
 	// });
 });
 
-// app.post('/results', function (req, res){
-// 	console.log(req.body);
-// 	req.body.user = req.session.user._id;
-// 	JSONbody.show(req.body, function(err, searches){
-// 		if (err){
-// 			console.log(err);
-// 		}
-// 	res.json(JSONbody);
-// 		//res.redirect('/results');
-// 	});
-	
-// });
-// app.post('/search', function (req, res){
-// 	console.log(req.body);
-// 	console.log(req.body.queryInput);
-// 	var queryStringObj = {
-// 		q: req.body.queryInput,
-// 		api_key: process.env.key
-// 	};
-// 	var requestOptions = {
-// 		url: glassDoorUrl,
-// 		methood:'GET',
-// 		qs:queryStringObj
-// 	};
-// 	request.get(requestOptions, function (error, apiResponse, body){
-// 		var JSONbody = JSON.parse(body);
-// 		res.render('results', {alldata: JSONbody});
-// 		//res.redirect('/results');
-// 	});
-	
-// });
-//get information from form to be passed into glassdoor api
-
-//get request to glassdoor api for business
 
 
 
@@ -223,9 +191,11 @@ app.post('/users', function (req, res) {
 	var user = req.body;
 	console.log(user);
 	db.User.createSecure(user.name, user.email, user.password, function(err, user){
-	// if(err){
-	// 	console.log(err);
-	// }
+	if ( err && err.code === 11000 ) {
+	  req.flash('error', 'User already exists');
+	  res.redirect('/signup');
+	  return;
+	}
 	req.session.userId = user._id;
 	req.session.user = user;
 	res.json({users:users, msg: 'user created'});

@@ -4,11 +4,13 @@
 	<title>Query Reults</title>
 	<% include ./_connections %>
 </head>
-<script src="/js/app.js"></script>
 <body>
 <div id='resultsWrapper'>
 <% include ./_navbar %>
 <div>
+	<h1>Below are your search results for : <%= queryInput%></h1>
+	<a href='http://www.glassdoor.com/index.htm'>powered by <img src='https://www.glassdoor.com/static/img/api/glassdoor_logo_80.png' title='Job Search' /></a>
+	</br>
 	<form id='apiSearchCity' method='POST' action='/search'> <!-- api search -->
 	  <label>Search by City or State</label>
 	  <input type='text' name='queryInput' placeholder='Enter an Area or City'></input>
@@ -26,23 +28,26 @@
 		<%for (var i=0; i < JSONbody.response.employers.length; i++) { %>
 		    <div class="col-sm-6">
 		      <div id='<%= JSONbody.response.employers[i].id %>' class='well card'>
-		      <form id='addApiQuery'>
-		      <li>
-		        <span class='list-group-item-text query'><h4><%= JSONbody.response.employers[i].name %></h4></span></br>
-		          <label class='add'>Company Name:</label>
-		          <input id='name' class='add' type='text' name='name' value='<%= JSONbody.response.employers[i].name %>'></input>
-		      
-		        <h4 class="list-group-item-heading"></h4>
-		        <span class='list-group-item-text'><%= JSONbody.response.employers[i].overallRating %></span></br>
-		        <span class='list-group-item-text'><%= JSONbody.response.employers[i].website %></span></br>
-		        <span class='list-group-item-text'><%= JSONbody.response.employers[i].squareLogo %></span></br>
+		      <form id='addApiQuery<%= JSONbody.response.employers[i].id %>'>
+		        <span class='list-group-item-text query'><h4><%= JSONbody.response.employers[i].name %></h4></span></b>
+		          <input type='hidden' name='name' value='<%= JSONbody.response.employers[i].name %>'></input>
+		        <span name='rating' class='list-group-item-text'><%= JSONbody.response.employers[i].overallRating %></span></br>
+		        <input type='hidden' name='rating' value='<%= JSONbody.response.employers[i].overallRating %>'></input>
+		        <span name='website' class='list-group-item-text'><%= JSONbody.response.employers[i].website %></span></br>
+		        <input type='hidden' name='website' value='<%= JSONbody.response.employers[i].website %>'></input>
+		        <span name='logo' class='list-group-item-text'><img src="<%= JSONbody.response.employers[i].squareLogo %>"  height="100" width="100"></span></br>
+		        <input type='hidden' name='logo' value='<%= JSONbody.response.employers[i].squareLogo %>'></input>
+		        <input type="hidden" name='status' value="current"></input>
 		        <!--add company to database button -->
-		        <button data-id='' class="view_co"> Add File</button> 
+		        <button id='add<%= JSONbody.response.employers[i].id %>' type='submit' data-id='<%= JSONbody.response.employers[i].id %>' class="query"> Add File</button> 
+		        <p class="add "> This company has been added to your database</p> 
+		        <button data-id='<%= JSONbody.response.employers[i].id %>' class="add"> View Profile</button> 
+				</form>
 		      </div>
 		    </div>
 		<% } %>
 	</div>
 </div>
-
+<% include ./_footer %>
 </body>
 </html>

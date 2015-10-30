@@ -28,7 +28,7 @@ app.use(session({
 	store: new MongoStore({mongooseConnection: mongoose.connection}),
 	//session expiration in 2 days
 	ttl: 2 * 24 * 60 * 60,
-	cookie: {maxAge: 6000000}
+	//cookie: {maxAge: 6000000}
 }));
 
 var db = require('./models/index.js');
@@ -53,9 +53,10 @@ var glassDoorUrl = 'http://api.glassdoor.com/api/api.htm?v=1'+ //address to glas
 
 //pull data in from api
 var JSONbody = '';
+var queryInput='';
 app.post('/searches', function (req, res){
 	console.log(req.body);
-	console.log(req.body.queryInput);
+	queryInput= req.body.queryInput;
 	var queryStringObj = {
 		q: req.body.queryInput,
 		api_key: process.env.key
@@ -81,7 +82,7 @@ app.get('/results', function (req, res){
 		if(err) console.log(err);
 	// searches.find({searches: searches}, function(err, searches){
 	// 		if (err) console.log(err);	
-	res.render('results', {JSONbody: JSONbody});
+	res.render('results', {JSONbody: JSONbody, queryInput:queryInput});
 	});
 	// });
 });
@@ -248,16 +249,17 @@ app.post('/login', function (req, res){
 });
 
 //create a rout to change company profile information
-app.put('/companies', function(req, res){
-	req.body.user = req.session.user._id;
-	//console.log(req.body);
-	db.Company.update(req.body, function (err, company){
+app.put('/companies/:id', function(req, res){
+	//req.body.user = req.session.user._id;
+	console.log(req.body);
+	db.Company.findOneAndUpdate({_id: req.params.id}, req.body, function (err, company){
 		if (err){
 			console.log(err);
 		}
-	res.json(company);
+		res.send(company);
 	});
 });
+
 
 //set preview on localy first
 // app.listen(3000, function(){

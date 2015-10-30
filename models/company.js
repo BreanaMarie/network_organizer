@@ -15,6 +15,9 @@ var CompanySchema= mongoose.Schema({
 	createdAt:String,
 	hotness: String,
 	status:String,
+	rating:String,
+	website:String,
+	logo:String,
 	user : { type: String, ref: 'User' }
 });
 

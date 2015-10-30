@@ -124,7 +124,7 @@ $('#companyProfile').on('click', 'button.view_co', function (e){
 	})
 	.done(function (data){
 		//console.log(data);
-		console.log("successful redirect");
+		//console.log("successful redirect");
 		window.location.href="/companies/" + redirectid;
 	})
 	.fail(function (data){
@@ -155,15 +155,17 @@ $('#company_profile').on('click', '.cancel', function (e){
 });
 
 //handler for the save button on editing profile
-$('#company_profile').on('submit', function (e){
+$('#company_profile').on('click', '.save', function (e){
 	e.preventDefault();
 	console.log("the save button clicks");
-
-	var formData = $(this).serialize();
-	//console.log(formData);
+	var object =$(this).data();
+	var redirectid = object.id;
+	console.log(redirectid);
+	var formData = $('form').serialize();
+	console.log(formData);
 
 		$.ajax({
-			url:'/companies',
+			url:'/companies/' + redirectid,
 			type:'PUT',
 			data: formData
 		})
@@ -178,27 +180,24 @@ $('#company_profile').on('submit', function (e){
 			console.log("failed to update company");
 		});
 });
-;
+
 
 $.get('ajax/results', function (JSONbody){
 	$('#queryResults').html(JSONbody);
 });
 
-//open form to post api query results to database
-$('#queryResults').on('click', function (e){
-	e.preventDefault();
-	console.log('the add query results to database button clicks');
-	$('.query').hide();
-	$('.add').show();
-});
+
+$('.query').show();
+$('.add').hide();
 
 //handler for saving glassdoor search restults to the database
-$('#queryResults').on('click', 'addApiQuery', function (e){
+$('#queryResults').on('click', '.query' ,function (e){
 	e.preventDefault();
 	console.log("the save api button clicks");
-
-	var formData = $(this).serialize();
+	var object =$(this).closest('form').data();
+	var formData = $(this).closest('form').serialize();
 	//console.log(formData);
+	var form = $(this).closest('form');
 
 		$.ajax({
 			url:'/companies',
@@ -207,13 +206,31 @@ $('#queryResults').on('click', 'addApiQuery', function (e){
 		})
 		.done(function (data){
 			console.log("company has been added to the database");
-			var redirectid = $(this).data().id;
-			window.location.href="/companies/" + redirectid;
-
+			//console.log ($(form));
+			$(form).find('.query').removeClass('query').hide();
+			$(form).find('.add').show();
+			//console.log (data._id);
+			$(form).children('button.add').addClass('view-profile').attr('data-mongoid', data._id);
+			//window.location.href="/companies/" + data._id;
 		})
 		.fail(function (data){
 			console.log("failed to add this company");
 		});
+});
+
+//handler to look at company profile from query results page
+$('#queryResults').on('click', '.view-profile' ,function (e){
+	e.preventDefault();
+	console.log("the view profile button clicks");
+	// var object = $(this).data("data-mongoId");
+	var companyId = $(this).data('mongoid');
+	//console.log(formData);
+	// var context= this;
+	// console.log('i am looking for this:', $(context).find('.addApiQuery'));
+
+
+	window.location.href="/companies/" + companyId;
+
 });
 
 });

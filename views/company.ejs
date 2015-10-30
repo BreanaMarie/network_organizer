@@ -11,6 +11,7 @@
   <div class="row">
     <div id='companyinfo' class="col-sm-4"> 
       <div id='companysidenav' class="well">
+      <img src="<%= company.logo %>">
         <h1><%= company.name %></h1>
         <p>  You have been connected to this company since: <%= company.createdAt %></p>
         </br>
@@ -56,10 +57,23 @@
               <input id='changeContact2' class='editing' type='text' name='contact2' value='<%= company.contact2 %>'></input>
           </li>
           <li>
-            <span class='list-group-item-text profile'>Company is currently filed under: <%= company.status %></span></br>
+            <span class='list-group-item-text profile'>Company rating from Glassdoor: <%= company.rating %></span>
+          </li>
+          <li>
+            <span class='list-group-item-text profile'><%= company.website %></span></br>
+              <label class='editing'>Company Website:</label>
+              <input id='changewebsite' class='editing' type='text' name='website' value='<%= company.website %>'></input>
+          </li>
+          <li>
+            <span class='list-group-item-text profile'><%= company.logo %></span></br>
+              <label class='editing'>Company Logo:</label>
+              <input id='changelogo' class='editing' type='text' name='logo' value='<%= company.logo %>'></input>
+          </li>
+          <li>
+            <span id='filebutton' class='list-group-item-text profile'>Company is currently filed under: <%= company.status %></span></br>
               <label class='editing'>Company File:</label></br>
-              <input class='editing' type="radio" name='status' value="current" checked="checked">Current Companies:</input>
-              <input class='editing' type="radio" name='status' value="burner">Back Burner Companies</input>
+              <input class='editing' type="radio" name='status' value="current" checked="checked">Current Companies:</input></br>
+              <input class='editing' type="radio" name='status' value="burner">Back Burner Companies</input></br>
               <input class='editing' type="radio" name='status' value="no_contact">Do Not Contact</input>
           </li>
           <li id='changeHotness'>
@@ -89,4 +103,5 @@
     </div>   
   </div>
   </div>
+  <% include ./_footer %>
 </body>

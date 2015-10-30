@@ -6,6 +6,22 @@ background-size: cover;
 background-color: #7c6d5e;
 }
 
+a {
+	color: #72171d;
+}
+
+.message {
+	color:#d1c6a8;
+	text-shadow: 1px 1px #000;
+}
+
+#footer {
+	display: block;
+	position: fixed;  
+	bottom: 0px;
+	text-align: center;
+}
+
 /*home page */
 body#homepage {
 	-webkit-background-size: cover;
@@ -27,7 +43,7 @@ body#homepage {
 
 .jumbotron{
 	background: transparent;
-	color:white;
+	color:#d1c6a8;
 	text-shadow: 2px 2px #72171d;
 	margin-top: 90px;
 }
@@ -128,8 +144,22 @@ body#homepage {
 	background-color: #d1c6a8;
 }
 
+#companysidenav img{
+	height: 100px;
+	width: 100px;
+}
+
 #companycontent{
 	background-color: #acc3ba;
+}
+
+#filebutton input[type='radio']{
+	margin-left: 20px;
+}
+
+/* company create page*/
+#apiSearchCity{
+
 }
 
 /* businesses page navigation tabs */
@@ -142,6 +172,18 @@ body#homepage {
     border: medium none;
     color:#fff;
 } 
+
+.navbar-default .navbar-nav>li>a {
+    color: #000;
+}
+
+.navbar-default .navbar-brand {
+    color: #000;
+}
+
+.navbar-default p{
+	color: #000;
+}
 
 .nav-tabs > li > a:hover{
   	background-color: #d1c6a8;

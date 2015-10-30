@@ -10,7 +10,7 @@
   <% include ./_navbar %>
   <div id='content' class="col-md-10">
     <h1>Create a New Company Record for your files</h1>
-    <h3>Search with Glassdoor to find to add to your network</h3>
+    <h3>Search with Glassdoor to find and add to your network</h3>
     <p>Use the fields below to search companies by location or by industry.</p>
     <form id='apiSearchCity' method='POST' action='/searches'> <!-- api search -->
       <label>Search by City or State</label>
@@ -23,10 +23,15 @@
       <input type='text' placeholder='Enter an Industry'></input>
       <button type="submit">Search</button>
     </form>
+    <a href='http://www.glassdoor.com/index.htm'>powered by <img src='https://www.glassdoor.com/static/img/api/glassdoor_logo_80.png' title='Job Search' /></a>
     </br>
     <h3>Or Create Your Own</h3>
     <p>Input what you know about the company in the form below and press submitt to add it to your current file</p>
-  	<form id='companyCreate' class='col-md-8'>
+    <h5 class='noUser message'> You must be logged in to use this feature</h5>
+    <p class='noUser'>Creating an account is easy, click <a href='/signup'>here</a> to get started
+    </br>
+    Already a member? Log back in <a href='/login'>here</a></p>
+  	<form id='companyCreate' class='col-md-8 loggedIn'>
   		<input type="text" name='name' placeholder='Company Name'></input></br>
       <input type="text" name='address'placeholder='Company Address'></input></br>
       <input type="text" name='city'placeholder='Company City'></input></br>
@@ -49,12 +54,10 @@
   		<button type="submit">Submit</button>
   	</form>
   </div>
-  <div id='footer'class='col-md-12'>
-  	<p>organizing people who are serious about finding a job</p>
-  </div>
+
 	
 </div>
 
-
+<% include ./_footer %>
 </body>
 </html>

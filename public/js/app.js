@@ -104,7 +104,7 @@ $('#headlines').on('click', '.view_co', function (e){
 	.done(function (data){
 		//console.log(data);
 		console.log("successful redirect");
-		window.location.href="/companies/" + redirectid;
+		window.location.href='/companies/' + redirectid;
 	})
 	.fail(function (data){
 		console.log("failed to redirect");
@@ -115,11 +115,11 @@ $('#headlines').on('click', '.view_co', function (e){
 //from businesses page
 $('#companyProfile').on('click', 'button.view_co', function (e){
 	e.preventDefault();
-	console.log('co button clicked');
+	//console.log('co button clicked');
 	var object =$(this).data();
 	var redirectid = object.id;
 	$.ajax({
-		url:'/companies/'+ redirectid,
+		url:'/companies/' + redirectid,
 		type: 'GET',
 	})
 	.done(function (data){
@@ -182,9 +182,9 @@ $('#company_profile').on('click', '.save', function (e){
 });
 
 
-$.get('ajax/results', function (JSONbody){
-	$('#queryResults').html(JSONbody);
-});
+// $.get('ajax/results', function (JSONbody){
+// 	$('#queryResults').html(JSONbody);
+// });
 
 
 $('.query').show();

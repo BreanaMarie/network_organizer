@@ -9,7 +9,6 @@ var mongoose = require('mongoose');
 var request = require('request');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
-var flash = require('connect-flash');
 
 
 //load secrets
@@ -20,7 +19,6 @@ app.set('view engine', 'ejs');
 app.use('/static', express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(flash());
 
 //set sessions to save to database to preserve login on refresh 
 app.use(session({
@@ -191,11 +189,9 @@ app.post('/users', function (req, res) {
 	var user = req.body;
 	console.log(user);
 	db.User.createSecure(user.name, user.email, user.password, function(err, user){
-	if ( err && err.code === 11000 ) {
-	  req.flash('error', 'User already exists');
-	  res.redirect('/signup');
-	  return;
-	}
+		// if(err){
+		// 	console.log(err);
+		// }
 	req.session.userId = user._id;
 	req.session.user = user;
 	res.json({users:users, msg: 'user created'});

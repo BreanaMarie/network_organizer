@@ -39,9 +39,9 @@
 		        <input type='hidden' name='logo' value='<%= JSONbody.response.employers[i].squareLogo %>'></input>
 		        <input type="hidden" name='status' value="current"></input>
 		        <!--add company to database button -->
-		        <button id='add<%= JSONbody.response.employers[i].id %>' type='submit' data-id='<%= JSONbody.response.employers[i].id %>' class="query"> Add File</button> 
-		        <p class="add "> This company has been added to your database</p> 
-		        <button data-id='<%= JSONbody.response.employers[i].id %>' class="add"> View Profile</button> 
+		        <button id='add<%= JSONbody.response.employers[i].id %>' type='submit' data-id='<%= JSONbody.response.employers[i].id %>' class="query btn btn-default"> Add File</button> 
+		        <p class="add"> This company has been added to your database</p> 
+		        <button data-id='<%= JSONbody.response.employers[i].id %>' class="add btn btn-default"> View Profile</button> 
 				</form>
 		      </div>
 		    </div>

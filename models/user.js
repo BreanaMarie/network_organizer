@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
 var UserSchema= mongoose.Schema({
 	name:String,
 	email:{type: String, unique:true},
-	passwordDigest:String,
+	passwordDigest:{type: String, required: true},
 });
 
 //function to take password, salt and hash it before saving into the database

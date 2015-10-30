@@ -1,7 +1,8 @@
 console.log("Sanity Check: JS is working!");
 
 $(document).ready(function(){
-
+	
+$('.collapse').collapse();
 
 //date converter function
 function datechange(dateObject) {

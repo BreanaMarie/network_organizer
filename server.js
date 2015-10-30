@@ -37,8 +37,8 @@ request.debug=true;
 //api
 var requestOptions={};
 //set api access variables
-partnerId=process.env.partnerId;
-key=process.env.key;
+var partnerId=process.env.partnerId;
+var key=process.env.key;
 
 
 //connection to glassdoor api 
@@ -69,7 +69,7 @@ app.post('/searches', function (req, res){
 	};
 	request.get(requestOptions, function (error, apiResponse, body){
 		JSONbody = JSON.parse(body);
-		
+		console.log(JSONbody);
 		res.redirect('/results');
 	
 	});

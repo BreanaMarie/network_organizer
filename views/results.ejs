@@ -9,19 +9,14 @@
 <% include ./_navbar %>
 <div>
 	<h1>Below are your search results for : <%= queryInput%></h1>
+	<h3>There are: <%= JSONbody.response.totalRecordCount %> companies with your search criteria</h3>
 	<a href='http://www.glassdoor.com/index.htm'>powered by <img src='https://www.glassdoor.com/static/img/api/glassdoor_logo_80.png' title='Job Search' /></a>
 	</br>
 	<form id='apiSearchCity' method='POST' action='/search'> <!-- api search -->
-	  <label>Search by City or State</label>
+	  <label>Search by name, location or industry</label>
 	  <input type='text' name='queryInput' placeholder='Enter an Area or City'></input>
 	  <button type="submit">Search</button>
 	  </form>
-	  </br>
-	  <form id='apiSearchInd' method='POST' action='/search'>
-	  <label>Or Search by Industry</label>
-	  <input type='text' placeholder='Enter an Industry'></input>
-	  <button type="submit">Search</button>
-	</form>
 </div>
 	<div id='queryResults'>
 		
@@ -31,9 +26,9 @@
 		      <form id='addApiQuery<%= JSONbody.response.employers[i].id %>'>
 		        <span class='list-group-item-text query'><h4><%= JSONbody.response.employers[i].name %></h4></span></b>
 		          <input type='hidden' name='name' value='<%= JSONbody.response.employers[i].name %>'></input>
-		        <span name='rating' class='list-group-item-text'><%= JSONbody.response.employers[i].overallRating %></span></br>
+		        <span name='rating' class='list-group-item-text'>Overall Rating from Glassdoor: <%= JSONbody.response.employers[i].overallRating %></span></br>
 		        <input type='hidden' name='rating' value='<%= JSONbody.response.employers[i].overallRating %>'></input>
-		        <span name='website' class='list-group-item-text'><%= JSONbody.response.employers[i].website %></span></br>
+		        <span name='website' class='list-group-item-text'><a href="<%= JSONbody.response.employers[i].website %>" target="_blank"><%= JSONbody.response.employers[i].website %></a> </span></br>
 		        <input type='hidden' name='website' value='<%= JSONbody.response.employers[i].website %>'></input>
 		        <span name='logo' class='list-group-item-text'><img src="<%= JSONbody.response.employers[i].squareLogo %>"  height="100" width="100"></span></br>
 		        <input type='hidden' name='logo' value='<%= JSONbody.response.employers[i].squareLogo %>'></input>
